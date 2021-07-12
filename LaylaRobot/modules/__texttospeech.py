@@ -51,7 +51,7 @@ async def _(event):
     lan = lan.strip()
     try:
         tts = gTTS(text, tld="com", lang=lan)
-        tts.save("k.mp3")
+        tts.save("tts @OdaRobot.mp3")
     except AssertionError:
         await event.reply(
             "The text is empty.\n"
@@ -68,8 +68,8 @@ async def _(event):
     except gTTSError:
         await event.reply("Error in Google Text-to-Speech API request !")
         return
-    with open("k.mp3", "r"):
+    with open("tts @OdaRobot.mp3", "r"):
         await tbot.send_file(
-            event.chat_id, "k.mp3", voice_note=True, reply_to=reply_to_id
+            event.chat_id, "tts @OdaRobot.mp3", voice_note=True, reply_to=reply_to_id
         )
-        os.remove("k.mp3")
+        os.remove("tts @OdaRobot.mp3")
