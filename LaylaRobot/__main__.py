@@ -87,9 +87,13 @@ STICKERS = (
         "CAACAgUAAx0CRI6ivgAC1sxg2iNwFjooHU0PjKL48FdVRw_NIwACyAMAAoyf0FaMuLOiawABEEceBA",
         "CAACAgUAAx0CRI6ivgAC1tRg2iPn9I5BtWpa_dL0kq7b4qvd-AAC-QIAArxX0VbSgHcf_OyMMB4E",
     )
+
+@register(cmds="start", no_args=True, only_pm=True)
+async def start_cmd(message):
+    await message.reply_sticker(random.choice(STICKERS))
+    await get_start_func(message)
     
 PM_START_TEXT = """
-await message.reply_sticker(random.choice(STICKERS))
 ✦ **Hi [{}](tg://user?id={})!** , my name is Oda! 
 ➛ I am an Anime themed group management bot ××
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
