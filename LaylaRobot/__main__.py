@@ -74,7 +74,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-✦ Hi , my name is Oda! 
+✦ Hi {} , my name is Oda! 
 
 ➛ I am an Anime themed group management bot ××
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
@@ -107,7 +107,7 @@ buttons = [
 
 
 HELP_STRINGS = """
-*Main* commands available: (https://telegra.ph/file/d0e9a565aa507f238bfdb.jpg)
+*Main* commands available[:](https://telegra.ph/file/d0e9a565aa507f238bfdb.jpg)
 
  ➛ /help: PM's you this message.
  ➛ /help <module name>: PM's you info about that module.
@@ -115,7 +115,7 @@ HELP_STRINGS = """
    ❂ in PM: will send you your settings for all supported modules.
    ❂ in a group: will redirect you to pm, with all that chat's settings."""
 
-layla_IMG = "https://telegra.ph/file/fa5805751e44608b1e162.png"
+LAYLA_IMG = "https://telegra.ph/file/fa5805751e44608b1e162.png"
 
 DONATE_STRING = """I am free for everyone"""
 
@@ -696,7 +696,7 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "Yes I'm alive 😹")
+            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "Yes I'm alive now")
         except Unauthorized:
             LOGGER.warning(
                 "Bot isnt able to send message to support_chat, go and check!"
