@@ -122,7 +122,7 @@ async def nsfw_watch(event):
             )
         else:
             await event.reply(
-                "I undestand `/nsfwguardian on` and `/nsfwguardian off` only"
+                "I undestand `/antinsfw on` and `/antinsfw off` only"
             )
     else:
         await event.reply("`You Should Be Admin To Do This!`")
@@ -148,7 +148,7 @@ async def ws(event):
         await event.delete()
         st = sender.first_name
         hh = sender.id
-        final = f"**NSFW DETECTED**\n\n{st}](tg://user?id={hh}) your message contain NSFW content.. So, Layla deleted the message\n\n **Nsfw Sender - User / Bot :** {st}](tg://user?id={hh})  \n\n`⚔️Automatic Detections Powered By LaylaAI` \n**#GROUP_GUARDIAN** "
+        final = f"**NSFW DETECTED**\n\n{st}](tg://user?id={hh}) your message contain NSFW content.. So, Layla deleted the message\n\n **Nsfw Sender - User / Bot :** {st}](tg://user?id={hh})  \n\n`⚔️Automatic Detections Powered By Oda` \n**#GROUP_GUARDIAN** "
         dev = await event.respond(final)
         await asyncio.sleep(10)
         await dev.delete()
@@ -156,7 +156,7 @@ async def ws(event):
 
 
 """
-@pbot.on_message(filters.command("nsfwguardian") & ~filters.edited & ~filters.bot)
+@pbot.on_message(filters.command("antinsfw") & ~filters.edited & ~filters.bot)
 async def add_nsfw(client, message):
     if len(await member_permissions(message.chat.id, message.from_user.id)) < 1:
         await message.reply_text("**You don't have enough permissions**")
@@ -179,7 +179,7 @@ async def add_nsfw(client, message):
         rm_chat(message.chat.id)
         await pablo.edit("Successfully Removed Chat From NSFW Watch service")
     else:
-        await message.reply(" I undestand only `/nsfwguardian on` or `/nsfwguardian off` only")
+        await message.reply(" I undestand only `/antinsfw on` or `/antinsfw off` only")
         
 @pbot.on_message(filters.incoming & filters.media & ~filters.private & ~filters.channel & ~filters.bot)
 async def nsfw_watch(client, message):
@@ -210,7 +210,7 @@ async def nsfw_watch(client, message):
             Escobar = midhun.id
         await client.send_message(
             message.chat.id,
-            f"**NSFW DETECTED**\n\n{hehe}'s message contain NSFW content.. So, Layla deleted the message\n\n **Nsfw Sender - User / Bot :** `{Escobar}` \n**Chat Title:** `{ctitle}` \n\n`⚔️Automatic Detections Powered By LaylaAI` \n**#GROUP_GUARDIAN** ",
+            f"**NSFW DETECTED**\n\n{hehe}'s message contain NSFW content.. So, Layla deleted the message\n\n **Nsfw Sender - User / Bot :** `{Escobar}` \n**Chat Title:** `{ctitle}` \n\n`⚔️Automatic Detections Powered By Oda` \n**#GROUP_GUARDIAN** ",
         )
         message.continue_propagation()
 """
@@ -367,7 +367,7 @@ async def del_profanity(event):
                     await event.delete()
                     st = sender.first_name
                     hh = sender.id
-                    final = f"**NSFW DETECTED**\n\n{st}](tg://user?id={hh}) your message contain NSFW content.. So, Layla deleted the message\n\n **Nsfw Sender - User / Bot :** {st}](tg://user?id={hh})  \n\n`⚔️Automatic Detections Powered By LaylaAI` \n**#GROUP_GUARDIAN** "
+                    final = f"**NSFW DETECTED**\n\n{st}](tg://user?id={hh}) your message contain NSFW content.. So, Layla deleted the message\n\n **Nsfw Sender - User / Bot :** {st}](tg://user?id={hh})  \n\n`⚔️Automatic Detections Powered By Oda` \n**#GROUP_GUARDIAN** "
                     dev = await event.respond(final)
                     await asyncio.sleep(10)
                     await dev.delete()
@@ -430,14 +430,12 @@ async def del_profanity(event):
 
 __help__ = """
 <b> Group Guardian: </b>
-✪ Layla can protect your group from NSFW senders, Slag word users and also can force members to use English
+✪ Oda can protect your group from NSFW senders, Slag word users and also can force members to use English
 
 <b>Commmands</b>
  - /gshield <i>on/off</i> - Enable|Disable Porn cleaning
  - /globalmode <i>on/off</i> - Enable|Disable English only mode
  - /profanity <i>on/off</i> - Enable|Disable slag word cleaning
- 
-Note: Special credits goes to Julia project and Friday Userbot
- 
+  
 """
 __mod_name__ = "Shield"
