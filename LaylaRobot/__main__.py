@@ -74,6 +74,7 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
     
+LAYLA_IMG,
 PM_START_TEXT = """
 ✦**Hi [{}](tg://user?id={})!** , my name is Oda!✦ 
 ➛ I am an Anime themed group management bot ××
