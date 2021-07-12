@@ -1,8 +1,6 @@
 import importlib
 import time
 import re
-import random
-
 from sys import argv
 from typing import Optional
 
@@ -73,7 +71,8 @@ def get_readable_time(seconds: int) -> str:
     ping_time += ":".join(time_list)
 
     return ping_time
-    
+
+
 PM_START_TEXT = """
 ✦**Hi [{}](tg://user?id={})!** , my name is Oda!✦ 
 ➛ I am an Anime themed group management bot ××
@@ -83,10 +82,30 @@ Maintained By @RxyMX
 ➛ Find the list of available commands with /help ××
 """
 
+buttons = [
+    [
+        InlineKeyboardButton(
+            text="➕️ ᴀᴅᴅ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url="t.me/OdaRobot?startgroup=true"),
+    ],
+    [
+        InlineKeyboardButton(text="✫ About ✫", callback_data="layla_"),
+        InlineKeyboardButton(
+            text="✯ Group Support ✯", url=f"https://t.me/{SUPPORT_CHAT}"
+        ),
+    ],
+    [
+        InlineKeyboardButton(text="✯ Anime Group ✯", url=f"https://t.me/Grup_Anime_Chat"),
+        InlineKeyboardButton(
+            text="✯ Channnel ✯", url=f"https://t.me/userlazyxbot"
+        ),
+    ],
+    [
+        InlineKeyboardButton(text="[► Help ◄]", callback_data="help_back"),
+    ],
+]
 
 HELP_STRINGS = """
 *Main* commands available[:](https://telegra.ph/file/d0e9a565aa507f238bfdb.jpg)
-
  ➛ /help: PM's you this message.
  ➛ /help <module name>: PM's you info about that module.
  ➛ /settings:
@@ -95,7 +114,7 @@ HELP_STRINGS = """
 
 LAYLA_IMG = "https://telegra.ph/file/fa5805751e44608b1e162.png"
 
-DONATE_STRING = """I am free for everyone"""
+DONATE_STRING = """I'm Free For Everyone"""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -197,35 +216,12 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            first_name = update.effective_user.first_name
-            update.effective_message.reply_photo(
-                LAYLA_IMG,
-                PM_START_TEXT.format(
-                    escape_markdown(first_name),
-                    escape_markdown(context.bot.first_name)),
+            update.effective_message.reply_text(
+                LAYLA_IMG, PM_START_TEXT
+                reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
-                disable_web_page_preview=True,
-                buttons = [
-    [
-        InlineKeyboardButton(
-            text="➕️ ᴀᴅᴅ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url="t.me/OdaRobot?startgroup=true"),
-    ],
-    [
-        InlineKeyboardButton(text="✫ About ✫", callback_data="layla_"),
-        InlineKeyboardButton(
-            text="✯ Group Support ✯", url=f"https://t.me/{SUPPORT_CHAT}"
-        ),
-    ],
-    [
-        InlineKeyboardButton(text="✯ Anime Group ✯", url=f"https://t.me/Grup_Anime_Chat"),
-        InlineKeyboardButton(
-            text="✯ Channnel ✯", url=f"https://t.me/userlazyxbot"
-        ),
-    ],
-    [
-        InlineKeyboardButton(text="[► Help ◄", callback_data="help_back"),
-    ],
-]
+                timeout=60,
+            )
     else:
         update.effective_message.reply_text(
             "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
@@ -371,7 +367,7 @@ def layla_about_callback(update, context):
                  \n❍ I have a note keeping system, blacklists, and even predetermined replies on certain keywords.
                  \n❍ I check for admins' permissions before executing any command and more stuffs
                  \n\n_Oda's licensed under the GNU General Public License v3.0_
-                 \n❍ Awesome Bots @UserLazyXBot
+                 \n❍ UserLazy Projects @UserLazyXBot
                  \n❍ Support Group @OdaSupport
                  \n❍ Assistant @OdaHelper.
                  \nHere is the [Author](https://t.me/RxyMX).
@@ -388,7 +384,6 @@ def layla_about_callback(update, context):
         )
     elif query.data == "layla_back":
         query.message.edit_text(
-                LAYLA_IMG,
                 PM_START_TEXT,
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
@@ -403,7 +398,7 @@ def Source_about_callback(update, context):
     if query.data == "source_":
         query.message.edit_text(
             text=""" Hi..🤗 I'm *Oda*
-                 \nHere is the [Source Code](https://github.com/UserLazy) .""",
+                 \nHere is the [Author](https://github.com/UserLazy) .""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -438,7 +433,7 @@ def get_help(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="Help",
+                                text="[► Help ◄]",
                                 url="t.me/{}?start=ghelp_{}".format(
                                     context.bot.username, module
                                 ),
@@ -454,7 +449,7 @@ def get_help(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="Help",
+                            text="[► Help ◄]",
                             url="t.me/{}?start=help".format(context.bot.username),
                         )
                     ]
@@ -667,11 +662,11 @@ def donate(update: Update, context: CallbackContext):
             )
 
             update.effective_message.reply_text(
-                "I've PM'ed you about my author!"
+                "I've PM'ed you about my creator!"
             )
         except Unauthorized:
             update.effective_message.reply_text(
-                "Contact me in PM first to get my author information."
+                "Contact me in PM first to get information."
             )
 
 
@@ -698,7 +693,7 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "Yes I'm alive now")
+            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "Yes I'm alive")
         except Unauthorized:
             LOGGER.warning(
                 "Bot isnt able to send message to support_chat, go and check!"
