@@ -1,6 +1,8 @@
 import importlib
 import time
 import re
+import random
+
 from sys import argv
 from typing import Optional
 
@@ -72,9 +74,22 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
 
-
+STICKERS = (
+        "CAACAgEAAxkDAAEE5zBgzpDoaKGN_MxWotYtWkpb1ifgMgACXAADni6oMXCx-PB6sonJHgQ",
+        "CAACAgEAAxkDAAEE5zFgzpFDFp_0V9vi-r5ZnKaOUDCVkAACVQADni6oMROiUdEEyPN8HgQ",
+        "CAACAgEAAxkDAAEE5zJgzpFxlslQcP9Xdjsvqb2oqkZrxQACeAADni6oMQhcS_oH6wPjHgQ",
+        "CAACAgEAAxkDAAEE5zNgzpGbRbc_ecGW1qIk2qojT0yTmgACdwADni6oMd2k3jP94wO6HgQ",
+        "CAACAgEAAxkDAAEE5zZgzpG9wHOrBm-X_gNGWlUSGXkEMQACWAADni6oMe7FeddXzDLoHgQ",
+        "CAACAgUAAx0CRI6ivgAC1qVg2iEgaRvIKr9auH4VGEalNK8UGAACAQMAAvEAAdBWNmr7bsO-rvseBA",
+        "CAACAgUAAx0CRI6ivgAC1rFg2iIT1mcmXTV1TZvM2WaA0tmKuAACRAMAAmpP0Fb1Txeqb6b0AR4E",
+        "CAACAgUAAx0CRI6ivgAC1rpg2iJ0UnLFLvWLw86DTatSLyKnvgAChwMAAlf90VYju1kc0R0pdB4E",
+        "CAACAgUAAx0CRI6ivgAC1sJg2iLnlFEKWs07Jw-ws784R01FTwACrQIAAlhx0FaXbV8XMcrAWx4E",
+        "CAACAgUAAx0CRI6ivgAC1sxg2iNwFjooHU0PjKL48FdVRw_NIwACyAMAAoyf0FaMuLOiawABEEceBA",
+        "CAACAgUAAx0CRI6ivgAC1tRg2iPn9I5BtWpa_dL0kq7b4qvd-AAC-QIAArxX0VbSgHcf_OyMMB4E",
+    )
+    await message.reply_sticker(random.choice(STICKERS))
 PM_START_TEXT = """
-✦ Hi {} , my name is Oda! 
+✦ **Hi [{}](tg://user?id={})!** , my name is Oda! 
 
 ➛ I am an Anime themed group management bot ××
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
