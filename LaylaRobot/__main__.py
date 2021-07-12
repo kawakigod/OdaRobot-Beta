@@ -74,7 +74,6 @@ def get_readable_time(seconds: int) -> str:
 
     return ping_time
     
-LAYLA_IMG,
 PM_START_TEXT = """
 ✦**Hi [{}](tg://user?id={})!** , my name is Oda!✦ 
 ➛ I am an Anime themed group management bot ××
@@ -417,7 +416,6 @@ def Source_about_callback(update, context):
         )
     elif query.data == "source_back":
         query.message.edit_text(
-                LAYLA_IMG,
                 PM_START_TEXT,
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
