@@ -83,28 +83,6 @@ Maintained By @RxyMX
 ➛ Find the list of available commands with /help ××
 """
 
-buttons = [
-    [
-        InlineKeyboardButton(
-            text="➕️ ᴀᴅᴅ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url="t.me/OdaRobot?startgroup=true"),
-    ],
-    [
-        InlineKeyboardButton(text="✫ About ✫", callback_data="layla_"),
-        InlineKeyboardButton(
-            text="✯ Group Support ✯", url=f"https://t.me/{SUPPORT_CHAT}"
-        ),
-    ],
-    [
-        InlineKeyboardButton(text="✯ Anime Group ✯", url=f"https://t.me/Grup_Anime_Chat"),
-        InlineKeyboardButton(
-            text="✯ Channnel ✯", url=f"https://t.me/userlazyxbot"
-        ),
-    ],
-    [
-        InlineKeyboardButton(text="[► Help ◄", callback_data="help_back"),
-    ],
-]
-
 
 HELP_STRINGS = """
 *Main* commands available[:](https://telegra.ph/file/d0e9a565aa507f238bfdb.jpg)
@@ -219,12 +197,35 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            update.effective_message.reply_text(
-                LAYLA_IMG, PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(buttons),
+            update.effective_message.reply_photo(
+                LAYLA_IMG,
+                PM_START_TEXT.format(
+                    escape_markdown(first_name),
+                    escape_markdown(context.bot.first_name),
+                ),
                 parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-            )
+                reply_markup=InlineKeyboardMarkup(
+                    [
+    [
+        InlineKeyboardButton(
+            text="➕️ ᴀᴅᴅ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url="t.me/OdaRobot?startgroup=true"),
+    ],
+    [
+        InlineKeyboardButton(text="✫ About ✫", callback_data="layla_"),
+        InlineKeyboardButton(
+            text="✯ Group Support ✯", url=f"https://t.me/{SUPPORT_CHAT}"
+        ),
+    ],
+    [
+        InlineKeyboardButton(text="✯ Anime Group ✯", url=f"https://t.me/Grup_Anime_Chat"),
+        InlineKeyboardButton(
+            text="✯ Channnel ✯", url=f"https://t.me/userlazyxbot"
+        ),
+    ],
+    [
+        InlineKeyboardButton(text="[► Help ◄", callback_data="help_back"),
+    ],
+])
     else:
         update.effective_message.reply_text(
             "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
