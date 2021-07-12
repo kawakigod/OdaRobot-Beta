@@ -205,32 +205,27 @@ def start(update: Update, context: CallbackContext):
                     escape_markdown(context.bot.first_name)),
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
-                reply_markup=InlineKeyboardMarkup(
-                    [[
-                        InlineKeyboardButton(
-                            text="➕️ ᴀᴅᴅ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", 
-                            url="t.me/OdaRobot?startgroup=true"),
-                    ],
-                     [
-                        InlineKeyboardButton(text="✫ About ✫", callback_data="layla_"),
-                        InlineKeyboardButton(
-                             text="✯ Group Support ✯", 
-                             url="https://t.me/odasupport"
-                              ),
-                    ],
-                     [
-                         InlineKeyboardButton(
-                             text="✯ Anime Group ✯",
-                             url="https://t.me/grup_anime_chat"),
-                         InlineKeyboardButton(
-                              text="✯ Channnel ✯", 
-                              url="https://t.me/userlazyxbot"
-                         ),
-                     ],
-                      [
-                         InlineKeyboardButton(text="[► Help ◄", callback_data="help_back"),
-                      ],
-                     ])
+                buttons = [
+    [
+        InlineKeyboardButton(
+            text="➕️ ᴀᴅᴅ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url="t.me/OdaRobot?startgroup=true"),
+    ],
+    [
+        InlineKeyboardButton(text="✫ About ✫", callback_data="layla_"),
+        InlineKeyboardButton(
+            text="✯ Group Support ✯", url=f"https://t.me/{SUPPORT_CHAT}"
+        ),
+    ],
+    [
+        InlineKeyboardButton(text="✯ Anime Group ✯", url=f"https://t.me/Grup_Anime_Chat"),
+        InlineKeyboardButton(
+            text="✯ Channnel ✯", url=f"https://t.me/userlazyxbot"
+        ),
+    ],
+    [
+        InlineKeyboardButton(text="[► Help ◄", callback_data="help_back"),
+    ],
+]
     else:
         update.effective_message.reply_text(
             "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
