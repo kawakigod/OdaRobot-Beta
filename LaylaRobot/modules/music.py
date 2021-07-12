@@ -16,7 +16,7 @@ from LaylaRobot.conf import get_str_key
 from LaylaRobot.pyrogramee.pluginshelper import get_text, progress
 from LaylaRobot import pbot
 
-GENIUS = get_str_key("GENIUS_API_TOKEN", None)
+GENIUS = get_str_key("P9ONHdCHGb4tbEtGn8z718QivHspwitAOtikt_YQbVJzPhN_qjnZueuAdJQJoqxD", None)
 
 
 @pbot.on_message(filters.command(["vsong", "video"]))
