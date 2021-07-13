@@ -4,7 +4,8 @@ from random import randint
 from time import time
 
 import aiohttp
-from LaylaRobot import aiohttpsession as aiosession
+from LaylaRobot import aiohttpsession 
+from aiohttp import ClientSession
 
 from google_trans_new import google_translator
 from Python_ARQ import ARQ
