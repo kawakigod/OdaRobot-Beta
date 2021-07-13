@@ -2,6 +2,7 @@ from LaylaRobot import pbot
 from LaylaRobot.utils.dbfunc import (update_karma, get_karma, get_karmas,
                                    int_to_alpha, alpha_to_int)
 from LaylaRobot.utils.filter_groups import karma_positive_group, karma_negative_group
+from LaylaRobot.utils.karmaperm import member_permissions
 from pyrogram import filters
 
 
