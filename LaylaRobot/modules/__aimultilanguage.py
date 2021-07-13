@@ -1,23 +1,44 @@
+# Copyright (C) 2021 Red-Aura & TeamDaisyX & HamkerCat
+
+# This file is part of Daisy (Telegram Bot)
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import re
 
 import emoji
 
-IBM_WATSON_CRED_URL = "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/bd6b59ba-3134-4dd4-aff2-49a79641ea15"
-IBM_WATSON_CRED_PASSWORD = "UQ1MtTzZhEsMGK094klnfa-7y_4MCpJY1yhd52MXOo3Y"
 url = "https://acobot-brainshop-ai-v1.p.rapidapi.com/get"
 import re
 
 import aiohttp
-from google_trans_new import google_translator
+
+# from google_trans_new import google_translator
+from googletrans import Translator as google_translator
 from pyrogram import filters
 
 from LaylaRobot import BOT_ID
 from LaylaRobot.helper_extra.aichat import add_chat, get_session, remove_chat
-from LaylaRobot.pyrogramee.pluginshelper import admins_only, edit_or_reply
-from LaylaRobot import pbot as layla
+from LaylaRobot.utils.arqapi import arq
+from LaylaRobot.utils.premissions import admins_only, edit_or_reply
+from LaylaRobot import pbot as oda
 
 translator = google_translator()
-import requests
+
+
+async def lunaQuery(query: str, user_id: int):
+    luna = await arq.luna(query, user_id)
+    return luna.result
 
 
 def extract_emojis(s):
@@ -39,15 +60,17 @@ async def fetch(url):
         return
 
 
-layla_chats = []
+daisy_chats = []
 en_chats = []
+# AI Chat (C) 2020-2021 by @InukaAsith
 
-@layla.on_message(
+
+@oda.on_message(
     filters.command("chatbot") & ~filters.edited & ~filters.bot & ~filters.private
 )
 @admins_only
 async def hmm(_, message):
-    global layla_chats
+    global daisy_chats
     if len(message.command) != 2:
         await message.reply_text(
             "I only recognize `/chatbot on` and /chatbot `off only`"
@@ -88,7 +111,7 @@ async def hmm(_, message):
         )
 
 
-@layla.on_message(
+@oda.on_message(
     filters.text
     & filters.reply
     & ~filters.bot
@@ -115,22 +138,16 @@ async def hmm(client, message):
     if chat_id in en_chats:
         test = msg
         test = test.replace("oda", "Aco")
-        test = test.replace("oda", "Aco")
-        URL = "https://api.affiliateplus.xyz/api/chatbot?message=hi&botname=@OdaRobot&ownername=@RxyMX"
+        test = test.replace("Oda", "Aco")
+        response = await lunaQuery(
+            test, message.from_user.id if message.from_user else 0
+        )
+        response = response.replace("Aco", "Oda")
+        response = response.replace("aco", "Oda")
 
+        pro = response
         try:
-            r = requests.request("GET", url=URL)
-        except:
-            return
-
-        try:
-            result = r.json()
-        except:
-            return
-
-        pro = result["message"]
-        try:
-            await layla.send_chat_action(message.chat.id, "typing")
+            await daisyx.send_chat_action(message.chat.id, "typing")
             await message.reply_text(pro)
         except CFError:
             return
@@ -166,43 +183,42 @@ async def hmm(client, message):
             # print (rm)
         try:
             lan = translator.detect(rm)
+            lan = lan.lang
         except:
             return
         test = rm
         if not "en" in lan and not lan == "":
             try:
-                test = translator.translate(test, lang_tgt="en")
+                test = translator.translate(test, dest="en")
+                test = test.text
             except:
                 return
         # test = emoji.demojize(test.strip())
 
-        # Kang with the credits bitches @InukaASiTH
         test = test.replace("oda", "Aco")
-        test = test.replace("oda", "Aco")
-        URL = f"https://api.affiliateplus.xyz/api/chatbot?message={test}&botname=@OdaRobot&ownername=@RxyMX"
-        try:
-            r = requests.request("GET", url=URL)
-        except:
-            return
-
-        try:
-            result = r.json()
-        except:
-            return
-        pro = result["message"]
+        test = test.replace("Oda", "Aco")
+        response = await lunaQuery(
+            test, message.from_user.id if message.from_user else 0
+        )
+        response = response.replace("Aco", "Oda")
+        response = response.replace("aco", "Oda")
+        response = response.replace("Luna", "Oda")
+        response = response.replace("luna", "Oda")
+        pro = response
         if not "en" in lan and not lan == "":
             try:
-                pro = translator.translate(pro, lang_tgt=lan[0])
+                pro = translator.translate(pro, dest=lan)
+                pro = pro.text
             except:
                 return
         try:
-            await layla.send_chat_action(message.chat.id, "typing")
+            await daisyx.send_chat_action(message.chat.id, "typing")
             await message.reply_text(pro)
         except CFError:
             return
 
 
-@layla.on_message(
+@oda.on_message(
     filters.text & filters.private & ~filters.edited & filters.reply & ~filters.bot
 )
 async def inuka(client, message):
@@ -239,12 +255,14 @@ async def inuka(client, message):
         # print (rm)
     try:
         lan = translator.detect(rm)
+        lan = lan.lang
     except:
         return
     test = rm
     if not "en" in lan and not lan == "":
         try:
-            test = translator.translate(test, lang_tgt="en")
+            test = translator.translate(test, dest="en")
+            test = test.text
         except:
             return
 
@@ -252,30 +270,25 @@ async def inuka(client, message):
 
     # Kang with the credits bitches @InukaASiTH
     test = test.replace("oda", "Aco")
-    test = test.replace("oda", "Aco")
-    URL = f"https://api.affiliateplus.xyz/api/chatbot?message={test}&botname=@OdaRobot&ownername=@RxyMX"
-    try:
-        r = requests.request("GET", url=URL)
-    except:
-        return
+    test = test.replace("Oda", "Aco")
 
-    try:
-        result = r.json()
-    except:
-        return
+    response = await lunaQuery(test, message.from_user.id if message.from_user else 0)
+    response = response.replace("Aco", "Oda")
+    response = response.replace("aco", "Oda")
 
-    pro = result["message"]
+    pro = response
     if not "en" in lan and not lan == "":
-        pro = translator.translate(pro, lang_tgt=lan[0])
+        pro = translator.translate(pro, dest=lan)
+        pro = pro.text
     try:
-        await layla.send_chat_action(message.chat.id, "typing")
+        await daisyx.send_chat_action(message.chat.id, "typing")
         await message.reply_text(pro)
     except CFError:
         return
 
 
-@layla.on_message(
-    filters.regex("layla|layla|Layla|Layla|Layla")
+@oda.on_message(
+    filters.regex("Oda|oda|Oda|oda|Oda")
     & ~filters.bot
     & ~filters.via_bot
     & ~filters.forwarded
@@ -317,49 +330,51 @@ async def inuka(client, message):
         # print (rm)
     try:
         lan = translator.detect(rm)
+        lan = lan.lang
     except:
         return
     test = rm
     if not "en" in lan and not lan == "":
         try:
-            test = translator.translate(test, lang_tgt="en")
+            test = translator.translate(test, dest="en")
+            test = test.text
         except:
             return
 
     # test = emoji.demojize(test.strip())
 
-    # Kang with the credits bitches @InukaASiTH
     test = test.replace("oda", "Aco")
-    test = test.replace("oda", "Aco")
-    URL = f"https://api.affiliateplus.xyz/api/chatbot?message={test}&botname=@OdaRobot&ownername=@RxyMX"
-    try:
-        r = requests.request("GET", url=URL)
-    except:
-        return
+    test = test.replace("Oda", "Aco")
+    response = await lunaQuery(test, message.from_user.id if message.from_user else 0)
+    response = response.replace("Aco", "Oda")
+    response = response.replace("aco", "Oda")
 
-    try:
-        result = r.json()
-    except:
-        return
-    pro = result["message"]
+    pro = response
     if not "en" in lan and not lan == "":
         try:
-            pro = translator.translate(pro, lang_tgt=lan[0])
+            pro = translator.translate(pro, dest=lan)
+            pro = pro.text
         except Exception:
             return
     try:
-        await layla.send_chat_action(message.chat.id, "typing")
+        await daisyx.send_chat_action(message.chat.id, "typing")
         await message.reply_text(pro)
     except CFError:
         return
 
 
 __help__ = """
-*Chatbot*
-Oda AI 3.0 IS THE ONLY AI SYSTEM WHICH CAN DETECT & REPLY UPTO 200 LANGUAGES
+Chatbot
+ODA AI 3.0 IS THE ONLY AI SYSTEM WHICH CAN DETECT & REPLY UPTO 200 LANGUAGES
+
  - /chatbot [ON/OFF]: Enables and disables AI Chat mode (EXCLUSIVE)
  - /chatbot EN : Enables English only chatbot
  
+ 
+<b> Assistant </b>
+ - /ask [question]: Ask question from oda
+ - /ask [reply to voice note]: Get voice reply
+ 
 """
 
-__mod_name__ = "Chatbot"
+__mod_name__ = "AI Assistant"
