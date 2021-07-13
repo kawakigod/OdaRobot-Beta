@@ -23,8 +23,8 @@ async def carbon_func(_, message):
     await m.delete()
     carbon.close()
 
-    __mod_name__ = "Carbon"
-    __help__ = """
+__mod_name__ = "Carbon Text"
+__help__ = """
     /carbon <text> [or reply]
 Usage: Beautify your code using carbon.now.sh
 """
