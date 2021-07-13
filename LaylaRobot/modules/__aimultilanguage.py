@@ -24,7 +24,7 @@ import re
 import aiohttp
 
 # from google_trans_new import google_translator
-from googletrans import Translator as google_translator
+from google_trans_new import google_translator
 from pyrogram import filters
 
 from LaylaRobot import BOT_ID
@@ -147,7 +147,7 @@ async def hmm(client, message):
 
         pro = response
         try:
-            await daisyx.send_chat_action(message.chat.id, "typing")
+            await layla.send_chat_action(message.chat.id, "typing")
             await message.reply_text(pro)
         except CFError:
             return
@@ -212,7 +212,7 @@ async def hmm(client, message):
             except:
                 return
         try:
-            await daisyx.send_chat_action(message.chat.id, "typing")
+            await layla.send_chat_action(message.chat.id, "typing")
             await message.reply_text(pro)
         except CFError:
             return
@@ -281,7 +281,7 @@ async def inuka(client, message):
         pro = translator.translate(pro, dest=lan)
         pro = pro.text
     try:
-        await daisyx.send_chat_action(message.chat.id, "typing")
+        await layla.send_chat_action(message.chat.id, "typing")
         await message.reply_text(pro)
     except CFError:
         return
@@ -357,7 +357,7 @@ async def inuka(client, message):
         except Exception:
             return
     try:
-        await daisyx.send_chat_action(message.chat.id, "typing")
+        await layla.send_chat_action(message.chat.id, "typing")
         await message.reply_text(pro)
     except CFError:
         return
