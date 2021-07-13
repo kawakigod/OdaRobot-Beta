@@ -23,7 +23,7 @@ from LaylaRobot import (BOT_ID, OWNER_ID, pbot, arq)
 from LaylaRobot.utils.errors import capture_err
 from LaylaRobot.utils.filter_groups import chatbot_group
 
-daisy_chats = []
+oda_chats = []
 en_chats = []
 # AI Chat (C) 2020-2021 by @RxyMX
 
