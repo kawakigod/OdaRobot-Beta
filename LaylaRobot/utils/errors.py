@@ -1,7 +1,7 @@
 import sys
 import traceback
 from functools import wraps
-from LaylaRobot import pbot as app
+from LaylaRobot import pbot 
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 
 LOG_GROUP_ID = int(-1001196083551)
@@ -31,7 +31,7 @@ def capture_err(func):
         try:
             return await func(client, message, *args, **kwargs)
         except ChatWriteForbidden:
-            await app.leave_chat(message.chat.id)
+            await pbot.leave_chat(message.chat.id)
             return
         except Exception as err:
             exc_type, exc_obj, exc_tb = sys.exc_info()
@@ -47,7 +47,7 @@ def capture_err(func):
                 ),
             )
             for x in error_feedback:
-                await app.send_message(
+                await pbot.send_message(
                     LOG_GROUP_ID,
                     x
                 )
