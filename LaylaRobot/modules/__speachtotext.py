@@ -14,8 +14,8 @@ from telethon.tl.types import *
 from LaylaRobot import *
 from LaylaRobot.events import register
 
-IBM_WATSON_CRED_PASSWORD = get_str_key("IBM_WATSON_CRED_PASSWORD", required=False)
-IBM_WATSON_CRED_URL = get_str_key("IBM_WATSON_CRED_URL", required=False)
+IBM_WATSON_CRED_PASSWORD = "UQ1MtTzZhEsMGK094klnfa-7y_4MCpJY1yhd52MXOo3Y"
+IBM_WATSON_CRED_URL = "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/bd6b59ba-3134-4dd4-aff2-49a79641ea15"
 TEMP_DOWNLOAD_DIRECTORY = "./"
 
 async def is_register_admin(chat, user):
