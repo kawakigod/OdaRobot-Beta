@@ -63,7 +63,7 @@ async def chatbot_status(_, message: Message):
         return await edit_or_reply(
             message, text="**Usage**\n/chatbot [ENABLE|DISABLE]"
         )
-    await chat_bot_toggle(active_chats_bot, message)
+    await chat_bot_toggle(oda_chats, message)
 
 
 async def lunaQuery(query: str, user_id: int):
@@ -91,7 +91,7 @@ async def type_and_send(message: Message):
 )
 @capture_err
 async def chatbot_talk(_, message: Message):
-    if message.chat.id not in active_chats_bot:
+    if message.chat.id not in oda_chats:
         return
     if not message.reply_to_message:
         return
