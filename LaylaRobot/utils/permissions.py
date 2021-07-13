@@ -1,7 +1,7 @@
 """
 MIT License
 
-Copyright (c) 2021 UserLazy
+Copyright (c) 2021 TheHamkerCat
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,8 @@ from pyrogram.errors.exceptions.forbidden_403 import \
     ChatWriteForbidden
 from pyrogram.types import Message
 
-from LaylaRobot import DEV_USERS, pbot
+from LaylaRobot import OWNER_ID, app
+from LaylaRobot.utils.karmaperm import member_permissions
 
 
 async def authorised(
@@ -78,4 +79,20 @@ def adminsOnly(permission):
                 return await unauthorised(
                     message, permission, subFunc2
                 )
-            
+            # For admins and sudo users
+            userID = message.from_user.id
+            permissions = await member_permissions(chatID, userID)
+            if (
+                userID not in SUDOERS
+                and permission not in permissions
+            ):
+                return await unauthorised(
+                    message, permission, subFunc2
+                )
+            return await authorised(
+                func, subFunc2, client, message, *args, **kwargs
+            )
+
+        return subFunc2
+
+    return subFunc
