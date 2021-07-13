@@ -26,9 +26,9 @@ import re
 
 from pyrogram import filters
 
-from wbb import app
+from LaylaRobot import app
 from LaylaRobot.utils.errors import capture_err
-from LaylaRobot.core.decorators.permissions import adminsOnly
+from LaylaRobot.utils.permissions import adminsOnly
 from LaylaRobot.utils.dbfunc import (alpha_to_int, get_karma,
                                    get_karmas, int_to_alpha,
                                    is_karma_on, karma_off, karma_on,
