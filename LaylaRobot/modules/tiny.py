@@ -105,7 +105,7 @@ async def ultiny(event):
     os.remove(ik)
 
 
-  __mod_name__ = "Tiny"
+__mod_name__ = "Tiny"
 __help__ = """
 /tiny [reply sticker] kawai sticker you get!
 """
