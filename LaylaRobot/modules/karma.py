@@ -26,7 +26,7 @@ import re
 
 from pyrogram import filters
 
-from LaylaRobot import app
+from LaylaRobot import pbot
 from LaylaRobot.utils.errors import capture_err
 from LaylaRobot.utils.permissions import adminsOnly
 from LaylaRobot.utils.dbfunc import (alpha_to_int, get_karma,
@@ -48,7 +48,7 @@ regex_upvote = r"^(\+|\+\+|\+1|thx|tnx|ty|thank you|thanx|thanks|pro|cool|good|ð
 regex_downvote = r"^(-|--|-1|ðŸ‘Ž|-- .+)$"
 
 
-@app.on_message(
+@pbot.on_message(
     filters.text
     & filters.group
     & filters.incoming
@@ -93,7 +93,7 @@ async def upvote(_, message):
     )
 
 
-@app.on_message(
+@pbot.on_message(
     filters.text
     & filters.group
     & filters.incoming
@@ -139,13 +139,13 @@ async def downvote(_, message):
     )
 
 
-@app.on_message(filters.command("karma") & filters.group)
+@pbot.on_message(filters.command("karma") & filters.group)
 @capture_err
 async def command_karma(_, message):
     chat_id = message.chat.id
     if not message.reply_to_message:
         m = await message.reply_text(
-            "Analyzing Karma...Will Take 10 Seconds"
+            "Analyzing Karma..."
         )
         karma = await get_karmas(chat_id)
         if not karma:
@@ -194,7 +194,7 @@ async def command_karma(_, message):
             await message.reply_text(f"**Total Points**: __{karma}__")
 
 
-@app.on_message(filters.command("karma_toggle") & ~filters.private)
+@pbot.on_message(filters.command("karma_toggle") & ~filters.private)
 @adminsOnly("can_change_info")
 async def captcha_state(_, message):
     usage = "**Usage:**\n/karma_toggle [ENABLE|DISABLE]"
