@@ -29,7 +29,7 @@ from LaylaRobot import *
 from LaylaRobot.events import register
 
 
-@register(pattern="^/google (.*)")
+@register(pattern="^/tiny (.*)")
 async def _(event):
     if event.fwd_from:
         return
