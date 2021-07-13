@@ -3,6 +3,8 @@ import os
 import sys
 import time
 import spamwatch
+from aiohttp import ClientSession
+from Python_ARQ import ARQ
 
 import telegram.ext as tg
 from pyrogram import Client, errors
@@ -191,6 +193,19 @@ updater = tg.Updater(TOKEN, workers=WORKERS, use_context=True)
 telethn = TelegramClient("layla", API_ID, API_HASH)
 pbot = Client("laylapbot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 dispatcher = updater.dispatcher
+
+# Aiohttp Client
+print("[INFO]: INITIALZING AIOHTTP SESSION")
+aiohttpsession = ClientSession()
+# ARQ Client
+print("[INFO]: INITIALIZING ARQ CLIENT")
+arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
+# Bot client
+print("[INFO]: INITIALIZING BOT CLIENT")
+app = Client(
+    "wbb", bot_token=TOKEN, api_id=API_ID, api_hash=API_HASH
+)
+
 
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)
