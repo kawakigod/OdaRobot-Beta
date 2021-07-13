@@ -68,7 +68,7 @@ en_chats = []
 @oda.on_message(
     filters.command("chatbot") & ~filters.edited & ~filters.bot & ~filters.private
 )
-@admins_only
+@adminsOnly
 async def hmm(_, message):
     global daisy_chats
     if len(message.command) != 2:
