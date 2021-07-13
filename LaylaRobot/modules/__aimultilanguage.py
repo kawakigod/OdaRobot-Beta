@@ -30,7 +30,7 @@ from pyrogram import filters
 from LaylaRobot import BOT_ID
 from LaylaRobot.helper_extra.aichat import add_chat, get_session, remove_chat
 from LaylaRobot.utils.arqapi import arq
-from LaylaRobot.utils.permissions import adminsOnly, edit_or_reply
+from LaylaRobot.utils.permissions import adminsOnly
 from LaylaRobot import pbot as oda
 
 translator = google_translator()
