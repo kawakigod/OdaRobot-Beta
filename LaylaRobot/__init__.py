@@ -204,7 +204,7 @@ arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 # Bot client
 print("[INFO]: INITIALIZING BOT CLIENT")
 app = Client(
-    "wbb", bot_token=TOKEN, api_id=API_ID, api_hash=API_HASH
+    "LaylaRobot", bot_token=TOKEN, api_id=API_ID, api_hash=API_HASH
 )
 
 
