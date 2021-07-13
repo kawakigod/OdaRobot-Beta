@@ -19,9 +19,9 @@ from asyncio import gather, sleep
 from pyrogram import filters
 from pyrogram.types import Message
 
-from wbb import (BOT_ID, OWNER_ID, pbot, arq)
-from wbb.utils.errors import capture_err
-from wbb.utils.filter_groups import chatbot_group
+from LaylaRobot import (BOT_ID, OWNER_ID, pbot, arq)
+from LaylaRobot.utils.errors import capture_err
+from LaylaRobot.utils.filter_groups import chatbot_group
 
 daisy_chats = []
 en_chats = []
