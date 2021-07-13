@@ -29,7 +29,6 @@ from pyrogram.errors.exceptions.forbidden_403 import \
 from pyrogram.types import Message
 
 from LaylaRobot import DEV_USERS, pbot
-from LaylaRobot.modules.admin import member_permissions
 
 
 async def authorised(
