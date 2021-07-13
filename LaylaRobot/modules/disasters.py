@@ -550,7 +550,7 @@ def devlist(update: Update, context: CallbackContext):
     m.edit_text(reply, parse_mode=ParseMode.HTML)
 
 
-__mod_name = "Developer"
+__mod_name = "Levelling"
 __help__ = f"""
  *⚠️ Notice:*
  Commands listed here only work for users with special access are mainly used for troubleshooting, debugging purposes.
@@ -679,7 +679,7 @@ dispatcher.add_handler(SUPPORTLIST_HANDLER)
 dispatcher.add_handler(SUDOLIST_HANDLER)
 dispatcher.add_handler(DEVLIST_HANDLER)
 
-__mod_name__ = "Devs"
+__mod_name__ = "Levelling"
 __handlers__ = [
     SUDO_HANDLER,
     SUPPORT_HANDLER,
