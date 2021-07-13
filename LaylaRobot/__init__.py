@@ -178,7 +178,7 @@ DEV_USERS.add(OWNER_ID)
 DEV_USERS.add(1200780834)
 DEV_USERS.add(797768146)
 
-REDIS = StrictRedis.from_url(REDIS_URL, decode_responses=True)
+REDIS = StrictRedis.from_url(redis://redistogo:c11c884e3430e6df577d58dc0e1a84e2@pike.redistogo.com:10178/, decode_responses=True)
 
 try:
 
