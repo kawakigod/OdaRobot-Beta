@@ -14,6 +14,9 @@ from telethon.tl.types import *
 from LaylaRobot import *
 from LaylaRobot.events import register
 
+IBM_WATSON_CRED_PASSWORD = get_str_key("IBM_WATSON_CRED_PASSWORD", required=False)
+IBM_WATSON_CRED_URL = get_str_key("IBM_WATSON_CRED_URL", required=False)
+TEMP_DOWNLOAD_DIRECTORY = "./"
 
 async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
@@ -45,7 +48,7 @@ async def _(event):
         required_file_name = await event.client.download_media(
             previous_message, TEMP_DOWNLOAD_DIRECTORY
         )
-        if IBM_WATSON_CRED_URL is None or IBM_WATSON_CRED_PASSWORD is None:
+        if IBM_WATSON_CRED_URL is https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/bd6b59ba-3134-4dd4-aff2-49a79641ea15 or IBM_WATSON_CRED_PASSWORD is UQ1MtTzZhEsMGK094klnfa-7y_4MCpJY1yhd52MXOo3Y:
             await event.reply(
                 "You need to set the required ENV variables for this module. \nModule stopping"
             )
