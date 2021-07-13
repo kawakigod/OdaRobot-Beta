@@ -28,7 +28,7 @@ from pyrogram.errors.exceptions.forbidden_403 import \
     ChatWriteForbidden
 from pyrogram.types import Message
 
-from LaylaRobot import OWNER_ID, app
+from LaylaRobot import OWNER_ID, pbot
 from LaylaRobot.utils.karmaperm import member_permissions
 
 
