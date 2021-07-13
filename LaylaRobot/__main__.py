@@ -74,7 +74,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-✦**Hi [{}](tg://user?id={})!** , My Name is Oda![✦](https://telegra.ph/file/fa5805751e44608b1e162.png)
+✦**Hi There!** , My Name is Oda![✦](https://telegra.ph/file/fa5805751e44608b1e162.png)
 ➛ I am an Anime themed group management bot ××
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 Maintained By @RxyMX
