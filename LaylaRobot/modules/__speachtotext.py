@@ -48,7 +48,7 @@ async def _(event):
         required_file_name = await event.client.download_media(
             previous_message, TEMP_DOWNLOAD_DIRECTORY
         )
-        if IBM_WATSON_CRED_URL is https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/bd6b59ba-3134-4dd4-aff2-49a79641ea15 or IBM_WATSON_CRED_PASSWORD is UQ1MtTzZhEsMGK094klnfa-7y_4MCpJY1yhd52MXOo3Y:
+        if IBM_WATSON_CRED_URL is None or IBM_WATSON_CRED_PASSWORD is None:
             await event.reply(
                 "You need to set the required ENV variables for this module. \nModule stopping"
             )
