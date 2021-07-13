@@ -5,7 +5,7 @@ from time import time
 
 import aiohttp
 from aiohttp import ClientSession
-from googletrans import Translator
+from google_trans_new import google_translator
 from Python_ARQ import ARQ
 from search_engine_parser import GoogleSearch
 
