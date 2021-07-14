@@ -2,11 +2,11 @@ from os import remove
 
 from pyrogram import filters
 
-from wbb import pbot, arq
-from wbb.utils.errors import capture_err
-from wbb.utils.permissions import adminsOnly
-from wbb.utils.dbfunc import is_nsfw_on, nsfw_off, nsfw_on
-from wbb.utils.filter_groups import nsfw_detect_group
+from LaylaRobot import pbot, arq
+from LaylaRobot.utils.errors import capture_err
+from LaylaRobot.utils.permissions import adminsOnly
+from LaylaRobot.utils.dbfunc import is_nsfw_on, nsfw_off, nsfw_on
+from LaylaRobot.utils.filter_groups import nsfw_detect_group
 
 __mod_name__ = "Anti-NSFW"
 __help__ = """
