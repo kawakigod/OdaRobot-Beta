@@ -27,8 +27,6 @@ eg: `/tl ja//en`: translates from Japanese to English.
 • `/langs`: get a list of supported languages for translation.
 """
 
-__mod_name__ = "Translator"
-
 
 trans = Translator()
 
@@ -80,9 +78,10 @@ def languages(update: Update, context: CallbackContext) -> None:
     )
 
 
-TRANSLATE_HANDLER = DisableAbleCommandHandler(["tr", "tl"], totranslate)
+TRANSLATE_HANDLER = DisableAbleCommandHandler(["tr", "tl"], translate)
 
 dispatcher.add_handler(TRANSLATE_HANDLER)
 
-
-
+__mod_name__ = "Translator"
+__command_list__ = ["tr", "tl"]
+__handlers__ = [TRANSLATE_HANDLER]
