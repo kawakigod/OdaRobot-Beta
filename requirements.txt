@@ -75,4 +75,4 @@ odmantic
 redis 
 cryptography
 ffmpeg-python
-
+gpytranslate
