@@ -73,4 +73,5 @@ python-arq
 odmantic
 redis 
 cryptography
+ffmpeg-python
 
