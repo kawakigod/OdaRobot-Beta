@@ -60,7 +60,7 @@ async def translate(_, message: Message) -> None:
 
     await message.reply_text(reply, parse_mode="html")
 
-
+@kp.on_message(filters.command("langs"))
 def languages(update: Update, context: CallbackContext) -> None:
     update.effective_message.reply_text(
         "Click on the button below to see the list of supported language codes.",
