@@ -6,7 +6,7 @@ from typing import Dict, Union
 from pyrogram import filters
 
 from LaylaRobot.utils.dbfunc import is_karma_on, karma_off, karma_on
-from LaylaRobot.pyrograme.pluginhelpers import member_permissions
+from LaylaRobot.pyrogramee.pluginhelpers import member_permissions
 from LaylaRobot import pbot as app
 from LaylaRobot.utils.filter_groups import (karma_positive_group, 
                                         karma_negative_group)
