@@ -12,6 +12,7 @@ psycopg2-binary
 feedparser
 hachoir
 pynewtonmath
+pykeyboard 
 spongemock
 zalgo-text
 geopy
