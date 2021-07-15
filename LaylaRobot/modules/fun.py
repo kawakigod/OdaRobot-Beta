@@ -2,6 +2,7 @@ import html
 import random
 import time
 
+import LaylaRobot.modules.fun_strings as fun_strings
 from LaylaRobot import dispatcher
 from LaylaRobot.modules.disable import DisableAbleCommandHandler, DisableAbleMessageHandler
 from LaylaRobot.modules.helper_funcs.chat_status import is_user_admin
