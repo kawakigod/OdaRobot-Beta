@@ -80,6 +80,9 @@ def languages(update: Update, context: CallbackContext) -> None:
     )
 
 
-LANG_HANDLER = DisableAbleCommandHandler("langs", languages, run_async=True)
+TRANSLATE_HANDLER = DisableAbleCommandHandler(["tr", "tl"], totranslate)
 
-dispatcher.add_handler(LANG_HANDLER)
+dispatcher.add_handler(TRANSLATE_HANDLER)
+
+
+
