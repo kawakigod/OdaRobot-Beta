@@ -85,3 +85,7 @@ dispatcher.add_handler(TRANSLATE_HANDLER)
 __mod_name__ = "Translator"
 __command_list__ = ["tr", "tl"]
 __handlers__ = [TRANSLATE_HANDLER]
+
+LANG_HANDLER = DisableAbleCommandHandler("langs", languages, run_async=True)
+
+dispatcher.add_handler(LANG_HANDLER)
