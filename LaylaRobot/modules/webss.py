@@ -24,8 +24,8 @@ SOFTWARE.
 from pyrogram import filters
 from pyrogram.types import Message
 
-from wbb import pbot as app
-from wbb.core.decorators.errors import capture_err
+from LaylaRobot import pbot as app
+from LaylaRobot.utils.errors import capture_err
 
 __mod_name__ = "WebSS"
 __help__ = "/webss [URL] - Take A Screenshot Of A Webpage"
