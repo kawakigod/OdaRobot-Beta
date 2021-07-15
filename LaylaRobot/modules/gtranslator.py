@@ -24,7 +24,7 @@ Use this module to translate stuff!
 eg: `/tl ja`: translates to Japanese.
 • `/tl <source>//<dest>`: translates from <source> to <lang>.
 eg: `/tl ja//en`: translates from Japanese to English.
-• `/langs`: get a list of supported languages for translation.
+• [List of supported languages for translation](https://telegra.ph/Lang-Codes-03-19-3)
 """
 
 
@@ -60,22 +60,6 @@ async def translate(_, message: Message) -> None:
 
     await message.reply_text(reply, parse_mode="html")
 
-@kp.on_message(filters.command("langs"))
-def languages(update: Update, context: CallbackContext) -> None:
-    update.effective_message.reply_text(
-        "Click on the button below to see the list of supported language codes.",
-        reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        text="Language codes",
-                        url="https://telegra.ph/Lang-Codes-03-19-3",
-                    ),
-                ],
-            ],
-            disable_web_page_preview=True,
-        ),
-    )
 
 
 TRANSLATE_HANDLER = DisableAbleCommandHandler(["tr", "tl"], translate)
@@ -86,6 +70,4 @@ __mod_name__ = "Translator"
 __command_list__ = ["tr", "tl"]
 __handlers__ = [TRANSLATE_HANDLER]
 
-LANG_HANDLER = DisableAbleCommandHandler("langs", languages, run_async=True)
 
-dispatcher.add_handler(LANG_HANDLER)
