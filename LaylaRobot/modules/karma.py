@@ -4,7 +4,7 @@
 from typing import Dict, Union
 
 from pyrogram import filters
-from LaylaRobot import db
+from LaylaRobot.utils.dbfunc import karmadb
 from LaylaRobot.utils.dbfunc import is_karma_on, karma_off, karma_on
 from LaylaRobot.pyrogramee.pluginshelper import member_permissions
 from LaylaRobot import pbot as app
