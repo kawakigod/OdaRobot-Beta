@@ -522,6 +522,50 @@ def __user_info__(user_id):
     return result
 
 #whois
+def ReplyCheck(message: Message):
+    reply_id = None
+
+    if message.reply_to_message:
+        reply_id = message.reply_to_message.message_id
+
+    elif not message.from_user.is_self:
+        reply_id = message.message_id
+
+    return reply_id
+
+
+infotext = (
+    "**[{full_name}](tg://user?id={user_id})**\n"
+    " * UserID: `{user_id}`\n"
+    " * First Name: `{first_name}`\n"
+    " * Last Name: `{last_name}`\n"
+    " * Username: `{username}`\n"
+    " * Last Online: `{last_online}`\n"
+    " * Bio: {bio}"
+)
+
+
+def LastOnline(user: User):
+    if user.is_bot:
+        return ""
+    elif user.status == "recently":
+        return "Recently"
+    elif user.status == "within_week":
+        return "Within the last week"
+    elif user.status == "within_month":
+        return "Within the last month"
+    elif user.status == "long_time_ago":
+        return "A long time ago :("
+    elif user.status == "online":
+        return "Currently Online"
+    elif user.status == "offline":
+        return datetime.fromtimestamp(user.status.date).strftime(
+            "%a, %d %b %Y, %H:%M:%S"
+        )
+
+
+def FullName(user: User):
+    return user.first_name + " " + user.last_name if user.last_name else user.first_name
 
 @pbot.on_message(filters.command("whois") & ~filters.edited & ~filters.bot)
 async def whois(client, message):
