@@ -3,6 +3,12 @@ import re
 import os
 import requests
 
+from datetime import datetime
+
+from pyrogram import filters
+from pyrogram.errors import PeerIdInvalid
+from pyrogram.types import Message, User
+
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.types import ChannelParticipantsAdmins
 from telethon import events
