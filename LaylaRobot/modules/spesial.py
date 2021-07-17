@@ -1,4 +1,4 @@
-__mod_name__ = "Extras"
+__mod_name__ = "Spesial"
 __help__ = """
 ──「 Urban Dictionary: 」──
 -> /ud <word>: Type the word or expression you want to search use.
