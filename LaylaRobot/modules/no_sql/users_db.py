@@ -16,13 +16,12 @@
 """User database utils."""
 
 from LaylaRobot import dispatcher
-from LaylaRobot.modules.no_sql import get_collection
+from LaylaRobot.modules.no_sql.users_db import get_collection
 
 
 USERS_DB = get_collection("USERS")
 CHATS_DB = get_collection("CHATS")
 CHAT_MEMBERS_DB = get_collection("CHAT_MEMBERS")
-LASTFM_USER = get_collection("LAST_FM")
 
 
 def ensure_bot_in_db():
