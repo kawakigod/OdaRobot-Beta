@@ -21,7 +21,7 @@ from telegram import ParseMode, error
 from telegram.ext import CommandHandler, run_async
 
 from LaylaRobot import LASTFM_API_KEY, dispatcher
-from LaylaRobot.modules.no_sql import get_collection
+from LaylaRobot.modules.no_sql.users_db import get_collection
 from LaylaRobot.modules.disable import DisableAbleCommandHandler
 from LaylaRobot.modules.helper_funcs.alternate import typing_action
 
