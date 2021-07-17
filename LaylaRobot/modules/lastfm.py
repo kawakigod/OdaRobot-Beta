@@ -1,89 +1,54 @@
-# UserindoBot
-# Copyright (C) 2020  UserindoBot Team, <https://github.com/userbotindo/UserIndoBot.git>
-#
-# This program is free software: you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-import time
+# Last.fm module by @TheRealPhoenix - https://github.com/rsktg
 
 import requests
-from telegram import ParseMode, error
-from telegram.ext import CommandHandler, run_async
 
-from LaylaRobot import LASTFM_API_KEY, dispatcher
-from LaylaRobot.modules.no_sql.users_db import get_collection
+from telegram import Update, ParseMode
+from telegram.ext import run_async, CommandHandler, CallbackContext
+
+from LaylaRobot import dispatcher, LASTFM_API_KEY
 from LaylaRobot.modules.disable import DisableAbleCommandHandler
-from LaylaRobot.modules.helper_funcs.alternate import typing_action
 
+import LaylaRobot.modules.sql.last_fm_sql as sql
 
-LASTFM_USER = get_collection("LAST_FM")
 
 @run_async
-@typing_action
-def set_user(update, context):
-    msg = update.effective_message
+def set_user(update: Update, context: CallbackContext):
     args = context.args
+    msg = update.effective_message
     if args:
         user = update.effective_user.id
         username = " ".join(args)
-        if LASTFM_USER.find_one({'_id': user}):
-            LASTFM_USER.find_one_and_update(
-                {'_id': user}, {"$set": {'username': username}})
-            del_msg = msg.reply_text(f"Username updated to {username}!")
-        else:
-            LASTFM_USER.insert_one({'_id': user, 'username': username})
-            del_msg = msg.reply_text(f"Username set as {username}!")
-
+        sql.set_user(user, username)
+        msg.reply_text(f"Username set as {username}!")
     else:
-        del_msg = msg.reply_text(
-            "That's not how this works...\nRun /setuser followed by your username!"
-        )
-    time.sleep(10)
-    try:
-        del_msg.delete()
-    except error.BadRequest:
-        return
+        msg.reply_text(
+            "That's not how this works...\nRun /setuser followed by your username!")
+
 
 @run_async
-@typing_action
-def clear_user(update, context):
+def clear_user(update: Update, _):
     user = update.effective_user.id
-    LASTFM_USER.delete_one({'_id': user})
-    clear = update.effective_message.reply_text(
-        "Last.fm username successfully cleared from my database!"
-    )
-    time.sleep(10)
-    clear.delete()
+    sql.set_user(user, "")
+    update.effective_message.reply_text(
+        "Last.fm username successfully cleared from my database!")
+
 
 @run_async
-@typing_action
-def last_fm(update, context):
+def last_fm(update: Update, _):
     msg = update.effective_message
     user = update.effective_user.first_name
     user_id = update.effective_user.id
-    data = LASTFM_USER.find_one({'_id': user_id})
-    if data is None:
+    username = sql.get_user(user_id)
+    if not username:
         msg.reply_text("You haven't set your username yet!")
         return
-    username = data["username"]
+
     base_url = "http://ws.audioscrobbler.com/2.0"
     res = requests.get(
-        f"{base_url}?method=user.getrecenttracks&limit=3&extended=1&user={username}&api_key={LASTFM_API_KEY}&format=json"
-    )
-    if not res.status_code == 200:
+        f"{base_url}?method=user.getrecenttracks&limit=3&extended=1&user={username}&api_key={LASTFM_API_KEY}&format=json")
+    if res.status_code != 200:
         msg.reply_text(
-            "Hmm... something went wrong.\nPlease ensure that you've set the correct username!"
-        )
+            "Hmm... something went wrong.\nPlease ensure that you've set the correct username!")
         return
 
     try:
@@ -112,40 +77,15 @@ def last_fm(update, context):
         rep = f"{user} was listening to:\n"
         for artist, song in track_dict.items():
             rep += f"🎧  <code>{artist} - {song}</code>\n"
-        last_user = (
-            requests.get(
-                f"{base_url}?method=user.getinfo&user={username}&api_key={LASTFM_API_KEY}&format=json"
-            )
-            .json()
-            .get("user")
-        )
+        last_user = requests.get(
+            f"{base_url}?method=user.getinfo&user={username}&api_key={LASTFM_API_KEY}&format=json").json().get("user")
         scrobbles = last_user.get("playcount")
         rep += f"\n(<code>{scrobbles}</code> scrobbles so far)"
 
-    send = msg.reply_text(rep, parse_mode=ParseMode.HTML)
-    time.sleep(60)
-    try:
-        send.delete()
-        msg.delete()
-    except error.BadRequest:
-        return
+    msg.reply_text(rep, parse_mode=ParseMode.HTML)
 
 
-def __stats__():
-    return "× {} saved Last.FM username.".format(
-        LASTFM_USER.count_documents({})
-    )
-
-__mod_name__ = "Last-FM"
-__help__ = """
--> /setuser <username>
-sets your last.fm username.
--> /clearuser
-removes your last.fm username from the bot's database.
--> /lastfm
-returns what you're scrobbling on last.fm.
-"""
-
+__mod_name__ = "Last.FM"
 
 SET_USER_HANDLER = CommandHandler("setuser", set_user, pass_args=True)
 CLEAR_USER_HANDLER = CommandHandler("clearuser", clear_user)
@@ -153,4 +93,4 @@ LASTFM_HANDLER = DisableAbleCommandHandler("lastfm", last_fm)
 
 dispatcher.add_handler(SET_USER_HANDLER)
 dispatcher.add_handler(CLEAR_USER_HANDLER)
-dispatcher.add_handler(LASTFM_HANDLER) 
+dispatcher.add_handler(LASTFM_HANDLER)
