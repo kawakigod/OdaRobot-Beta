@@ -515,6 +515,42 @@ def __user_info__(user_id):
     result = result.strip("\n")
     return result
 
+#whois
+
+@pbot.on_message(filters.command("whois") & ~filters.edited & ~filters.bot)
+async def whois(client, message):
+    cmd = message.command
+    if not message.reply_to_message and len(cmd) == 1:
+        get_user = message.from_user.id
+    elif len(cmd) == 1:
+        get_user = message.reply_to_message.from_user.id
+    elif len(cmd) > 1:
+        get_user = cmd[1]
+        try:
+            get_user = int(cmd[1])
+        except ValueError:
+            pass
+    try:
+        user = await client.get_users(get_user)
+    except PeerIdInvalid:
+        await message.reply("I don't know that User.")
+        return
+    desc = await client.get_chat(get_user)
+    desc = desc.description
+    await message.reply_text(
+        infotext.format(
+            full_name=FullName(user),
+            user_id=user.id,
+            user_dc=user.dc_id,
+            first_name=user.first_name,
+            last_name=user.last_name if user.last_name else "",
+            username=user.username if user.username else "",
+            last_online=LastOnline(user),
+            bio=desc if desc else "`No bio set up.`",
+        ),
+        disable_web_page_preview=True,
+    )
+
 
 __help__ = """
 *Away from group*
@@ -542,7 +578,8 @@ When marked as AFK, any mentions will be replied to with a message to say you're
 
 *Overall Information about you:*
  ❍ /info*:* get information about a user. 
- 
+  ❍ /whois*:* get information about a user without pfp
+
 *What is that health thingy?*
  Come and see [HP System explained](https://t.me/OnePunchUpdates/192)
 """
@@ -554,7 +591,7 @@ STATS_HANDLER = CommandHandler("stats", stats)
 ID_HANDLER = DisableAbleCommandHandler("id", get_id)
 GIFID_HANDLER = DisableAbleCommandHandler("gifid", gifid)
 INFO_HANDLER = DisableAbleCommandHandler(("info", "book"), info)
-
+WHOIS_HANDLER = DisableAbleCommandHandler("whois", whois)
 SET_ABOUT_HANDLER = DisableAbleCommandHandler("setme", set_about_me)
 GET_ABOUT_HANDLER = DisableAbleCommandHandler("me", about_me)
 
@@ -566,9 +603,11 @@ dispatcher.add_handler(SET_BIO_HANDLER)
 dispatcher.add_handler(GET_BIO_HANDLER)
 dispatcher.add_handler(SET_ABOUT_HANDLER)
 dispatcher.add_handler(GET_ABOUT_HANDLER)
+dispatcher.add_handler(WHOIS_HANDLER)
+
 
 __mod_name__ = "Infos"
-__command_list__ = ["setbio", "bio", "setme", "me", "info"]
+__command_list__ = ["setbio", "bio", "setme", "me", "info", "whois"]
 __handlers__ = [
     ID_HANDLER,
     GIFID_HANDLER,
