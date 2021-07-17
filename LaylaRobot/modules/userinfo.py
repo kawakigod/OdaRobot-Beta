@@ -641,7 +641,6 @@ STATS_HANDLER = CommandHandler("stats", stats)
 ID_HANDLER = DisableAbleCommandHandler("id", get_id)
 GIFID_HANDLER = DisableAbleCommandHandler("gifid", gifid)
 INFO_HANDLER = DisableAbleCommandHandler(("info", "book"), info)
-WHOIS_HANDLER = DisableAbleCommandHandler("whois", whois)
 SET_ABOUT_HANDLER = DisableAbleCommandHandler("setme", set_about_me)
 GET_ABOUT_HANDLER = DisableAbleCommandHandler("me", about_me)
 
@@ -653,7 +652,6 @@ dispatcher.add_handler(SET_BIO_HANDLER)
 dispatcher.add_handler(GET_BIO_HANDLER)
 dispatcher.add_handler(SET_ABOUT_HANDLER)
 dispatcher.add_handler(GET_ABOUT_HANDLER)
-dispatcher.add_handler(WHOIS_HANDLER)
 
 
 __mod_name__ = "Infos"
