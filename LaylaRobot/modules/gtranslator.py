@@ -61,11 +61,6 @@ async def translate(_, message: Message) -> None:
     await message.reply_text(reply, parse_mode="html")
 
 
-
-TRANSLATE_HANDLER = DisableAbleCommandHandler(["tr", "tl"], translate)
-
-dispatcher.add_handler(TRANSLATE_HANDLER)
-
 __mod_name__ = "Translator"
 __command_list__ = ["tr", "tl"]
 __handlers__ = [TRANSLATE_HANDLER]
