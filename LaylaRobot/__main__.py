@@ -75,7 +75,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-✦**Yoshaa! {}, myself {}!** 
+*Yoshaa! {}, Myself* [{}](https://telegra.ph/file/fa5805751e44608b1e162.png)!
 **An Anime themed group management bot**
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 Maintained By @RxyMX
@@ -221,9 +221,8 @@ def start(update: Update, context: CallbackContext):
 
         else:
             first_name = update.effective_user.first_name
-            update.effective_message.reply_photo(
-                LAYLA_IMG,
-                caption=PM_START_TEXT.format(
+            update.effective_message.reply_text(
+                    PM_START_TEXT.format(
                     escape_markdown(first_name),
                     escape_markdown(context.bot.first_name),
                     escape_markdown(uptime),
