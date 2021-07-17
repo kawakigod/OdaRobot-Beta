@@ -96,6 +96,7 @@ if ENV:
     ARQ_API_URL = os.environ.get("ARQ_API_URL", None)
     ARQ_API_KEY = os.environ.get("ARQ_API_KEY", None)
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
+    LASTFM_API_KEY = os.environ.get("LASTFM_API_KEY", None)
 
     try:
         BL_CHATS = set(int(x) for x in os.environ.get("BL_CHATS", "").split())
