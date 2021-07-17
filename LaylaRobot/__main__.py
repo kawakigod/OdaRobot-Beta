@@ -27,6 +27,7 @@ from LaylaRobot import (
 # NOTE: Module order is not guaranteed, specify that in the config file!
 from LaylaRobot.modules import ALL_MODULES
 from LaylaRobot.modules.helper_funcs.chat_status import is_user_admin
+import LaylaRobot.modules.sql.users_sql as sql
 from LaylaRobot.modules.helper_funcs.misc import paginate_modules
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.error import (
@@ -74,10 +75,13 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-✦**Hi There!** , My Name is Oda![✦](https://telegra.ph/file/fa5805751e44608b1e162.png)
-➛ I am an Anime themed group management bot ××
+✦**Yoshaa! {}, myself {}!** 
+**An Anime themed group management bot**
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 Maintained By @RxyMX
+
+• *Uptime:* `{}`
+• `{}` *users, across* `{}` *chats.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
 ➛ Find the list of available commands with /help ××
 """
@@ -216,8 +220,17 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
+            first_name = update.effective_user.first_name
             update.effective_message.reply_text(
-                PM_START_TEXT,
+                LAYLA_IMG,
+                caption=PM_START_TEXT.format(
+                    escape_markdown(first_name),
+                    escape_markdown(context.bot.first_name),
+                    escape_markdown(uptime),
+                    sql.num_users(),
+                    sql.num_chats()),
+                parse_mode=ParseMode.MARKDOWN,
+                disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
