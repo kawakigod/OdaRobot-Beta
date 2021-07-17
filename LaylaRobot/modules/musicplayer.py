@@ -31,7 +31,7 @@ __help__ = """
 ╠═4). If userbot joined enjoy music, If not add @OdaHelper 
 ╠═════════════════════════════════
 ╠═/play [title] - Play song using youtube music
-╠═/play [yt url] - Play the given yt url
+╠═/play | /ytplay [yt url] - Play the given yt url
 ╠═/dplay [title] - Play song using deezer music
 ╠═/splay [title] - Play song using svaan music
 ╠═════════════════════════════════
