@@ -86,6 +86,14 @@ def last_fm(update: Update, _):
 
 
 __mod_name__ = "Last.FM"
+__help__ = """
+-> /setuser <username>
+sets your last.fm username.
+-> /clearuser
+removes your last.fm username from the bot's database.
+-> /lastfm
+returns what you're scrobbling on last.fm.
+"""
 
 SET_USER_HANDLER = CommandHandler("setuser", set_user, pass_args=True)
 CLEAR_USER_HANDLER = CommandHandler("clearuser", clear_user)
