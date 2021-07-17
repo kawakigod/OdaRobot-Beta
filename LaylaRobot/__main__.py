@@ -118,6 +118,7 @@ HELP_STRINGS = """
    ❂ in a group: will redirect you to pm, with all that chat's settings."""
 
 LAYLA_IMG = "https://telegra.ph/file/fa5805751e44608b1e162.png"
+ODA_IMG = "https://telegra.ph/file/ffe156089bcb0eb0bf239.jpg"
 
 DONATE_STRING = """I'm Free For Everyone"""
 
@@ -233,10 +234,10 @@ def start(update: Update, context: CallbackContext):
                 timeout=60,
             )
     else:
-        update.effective_message.reply_text(
-            "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
-                uptime
-            ),
+        update.effective_message.reply_photo(
+            ODA_IMG,
+            caption="I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
+                uptime),
             parse_mode=ParseMode.HTML,
         )
 
