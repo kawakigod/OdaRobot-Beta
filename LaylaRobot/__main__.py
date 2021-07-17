@@ -75,11 +75,12 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-*Yoshaa! {}, Myself* [{}](https://telegra.ph/file/fa5805751e44608b1e162.png)!
-**An Anime themed group management bot**
-➖➖➖➖➖➖➖➖➖➖➖➖➖
-Maintained By @RxyMX
+──「 [Oda Nobunaga](https://telegra.ph/file/fa5805751e44608b1e162.png) 」──
 
+*Yoshaa! {},*
+*I'm Anime themed group management bot*
+I've some features for you :)
+➖➖➖➖➖➖➖➖➖➖➖➖➖
 • *Uptime:* `{}`
 • `{}` *users, across* `{}` *chats.*
 ➖➖➖➖➖➖➖➖➖➖➖➖➖
