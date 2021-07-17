@@ -63,6 +63,5 @@ async def translate(_, message: Message) -> None:
 
 __mod_name__ = "Translator"
 __command_list__ = ["tr", "tl"]
-__handlers__ = [TRANSLATE_HANDLER]
 
 
