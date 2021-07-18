@@ -890,7 +890,7 @@ def demote(update: Update, context: CallbackContext) -> str:
         )
         return
     
-    @run_async
+@run_async
 @bot_admin
 @can_pin
 @user_admin
