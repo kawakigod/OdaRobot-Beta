@@ -103,11 +103,11 @@ __mod_name__ = "Admin"
 __help__ = """
 Make it easy to admins for manage users and groups with the admin module!
 
-<b>Available commands:</b>
+Available commands:
 
 ──「 Admin List: 」──
-- /adminlist: Shows all admins of the chat.*
-- /admincache: Update the admin cache, to take into account new admins/admin permissions.*
+- /admins: Shows all admins of the chat.
+- /admincache: Update the admin cache, to take into account new admins/admin permissions.
 
 ──「 Mutes: 」──
 - /mute: mute a user
@@ -121,17 +121,17 @@ Make it easy to admins for manage users and groups with the admin module!
 - /unban: unbans a user
 - /unbanall: Unban all banned members
 - /banme: Bans you
-- /kick: kicks a user
+- /punch: kicks a user
 - /kickme: Kicks you
 
 ──「 Promote/Demote: 」──
-- /promote (user) (?admin's title): Promotes the user to admin.*
-- /demote (user): Demotes the user from admin.*
-- /lowpromote: Promote a member with low rights*
-- /midpromote: Promote a member with mid rights*
-- /highpromote: Promote a member with max rights*
-- /lowdemote: Demote an admin to low permissions*
-- /middemote: Demote an admin to mid permissions*
+- /promote (user) (?admin's title): Promotes the user to admin.
+- /demote (user): Demotes the user from admin.
+- /lowpromote: Promote a member with low rights
+- /midpromote: Promote a member with mid rights
+- /highpromote: Promote a member with max rights
+- /lowdemote: Demote an admin to low permissions
+- /middemote: Demote an admin to mid permissions
 
 ──「 Cleaner/Purges: 」──
 - /purge: deletes all messages from the message you replied to
@@ -152,7 +152,7 @@ Make it easy to admins for manage users and groups with the admin module!
 - /setdescription: Set group description
 - /setsticker: Set group sticker
 
-*Note:
+Note:
 Sometimes, you promote or demote an admin manually, and Daisy doesn't realise it immediately. This is because to avoid spamming telegram servers, admin status is cached locally.
 This means that you sometimes have to wait a few minutes for admin rights to update. If you want to update them immediately, you can use the /admincache command; that'll force Odato check who the admins are again.
 """
