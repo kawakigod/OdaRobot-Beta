@@ -639,6 +639,39 @@ async def set_group_des(gpic):
         await gpic.reply("Failed to set group description.")
 
 
+@bot.on(events.NewMessage(pattern="/setsticker$"))
+async def set_group_sticker(gpic):
+    if gpic.is_group:
+        if not await can_change_info(message=gpic):
+            return
+    else:
+        return
+
+    rep_msg = await gpic.get_reply_message()
+    if not rep_msg.document:
+        await gpic.reply("Reply to any sticker plox.")
+        return
+    stickerset_attr_s = rep_msg.document.attributes
+    stickerset_attr = find_instance(stickerset_attr_s, DocumentAttributeSticker)
+    if not stickerset_attr.stickerset:
+        await gpic.reply("Sticker does not belong to a pack.")
+        return
+    try:
+        id = stickerset_attr.stickerset.id
+        access_hash = stickerset_attr.stickerset.access_hash
+        print(id)
+        print(access_hash)
+        await bot(
+            functions.channels.SetStickersRequest(
+                channel=gpic.chat_id,
+                stickerset=types.InputStickerSetID(id=id, access_hash=access_hash),
+            )
+        )
+        await gpic.reply("Group sticker pack successfully set !")
+    except Exception as e:
+        print(e)
+        await gpic.reply("Failed to set group sticker pack.")
+
 
 async def extract_time(message, time_val):
     if any(time_val.endswith(unit) for unit in ("m", "h", "d")):
@@ -664,5 +697,3 @@ async def extract_time(message, time_val):
             )
         )
         return
-      
-    
