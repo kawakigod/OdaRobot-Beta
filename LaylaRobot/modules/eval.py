@@ -195,8 +195,5 @@ async def shellrunner(client, message):
 
 
 
-EVAL_HANDLER = CommandHandler(("e", "ev", "eva", "eval"), evaluate)
 
-dispatcher.add_handler(EVAL_HANDLER)
 
-__mod_name__ = "Eval Module"
