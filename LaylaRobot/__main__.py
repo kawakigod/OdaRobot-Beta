@@ -132,6 +132,13 @@ DATA_EXPORT = []
 CHAT_SETTINGS = {}
 USER_SETTINGS = {}
 
+button =  [
+        InlineKeyboardButton(text="✯ Channel ✯", url=f"https://t.me/UserLazyXBot"),
+        InlineKeyboardButton(
+            text="✯ Support ✯", url=f"https://t.me/{SUPPORT_CHAT}"
+        ),
+    ]
+
 for module_name in ALL_MODULES:
     imported_module = importlib.import_module("LaylaRobot.modules." + module_name)
     if not hasattr(imported_module, "__mod_name__"):
@@ -238,7 +245,9 @@ def start(update: Update, context: CallbackContext):
             ODA_IMG,
             caption="I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
                 uptime),
+            reply_markup=InlineKeyboardMarkup(button),
             parse_mode=ParseMode.HTML,
+            timeout=60,
         )
 
 
