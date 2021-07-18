@@ -153,6 +153,6 @@ Available commands:
 - /setsticker: Set group sticker
 
 Note:
-Sometimes, you promote or demote an admin manually, and Daisy doesn't realise it immediately. This is because to avoid spamming telegram servers, admin status is cached locally.
-This means that you sometimes have to wait a few minutes for admin rights to update. If you want to update them immediately, you can use the /admincache command; that'll force Odato check who the admins are again.
+Sometimes, you promote or demote an admin manually, and Oda doesn't realise it immediately. This is because to avoid spamming telegram servers, admin status is cached locally.
+This means that you sometimes have to wait a few minutes for admin rights to update. If you want to update them immediately, you can use the /admincache command; that'll force Oda to check who the admins are again.
 """
