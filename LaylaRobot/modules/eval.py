@@ -18,8 +18,8 @@ from pyrogram import filters
 from pyrogram.types import (InlineKeyboardButton,
                             InlineKeyboardMarkup, Message)
 
-from LyndaRobot import OWNER_ID
-from LyndaRobot import pbot as app
+from LaylaRobot import OWNER_ID
+from LaylaRobot import pbot as app
 
 
 async def aexec(code, client, message):
