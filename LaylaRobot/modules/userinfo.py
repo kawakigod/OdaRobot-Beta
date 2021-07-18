@@ -344,7 +344,7 @@ def info(update: Update, context: CallbackContext):
             _file.download(f"{user.id}.png")
 
             message.reply_photo(
-                document=open(f"{user.id}.png", "rb"),
+                photo=open(f"{user.id}.png", "rb"),
                 caption=(text),
                 parse_mode=ParseMode.HTML,
                 disable_web_page_preview=True,
