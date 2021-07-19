@@ -3,9 +3,6 @@ from LaylaRobot import LOGGER
 
 DEFAULTS = {
     "LOAD_MODULES": True,
-    "REDIS_HOST": "localhost",
-    "REDIS_PORT": 6379,
-    "REDIS_DB_FSM": 1,
 }
 
 def get_str_key(name, required=False):
