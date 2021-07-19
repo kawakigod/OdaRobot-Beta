@@ -19,7 +19,6 @@ Turn on worker dyno (Don't worry It's free :D) & Webhook
 Now send the bot /start, If it doesn't respond go to https://dashboard.heroku.com/apps/(app-name)/settings and remove webhook and port.
 ```
 
-[![Deploy To Heroku](heroku.com/deploy?template=https://github.com/UserLazy/OdaRobot-Beta.git)
 
 
 
