@@ -10,7 +10,6 @@ from redis import StrictRedis
 import telegram.ext as tg
 from pyrogram import Client, errors
 from telethon import TelegramClient
-from LaylaRobot.conf import get_str_key
 
 StartTime = time.time()
 
