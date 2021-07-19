@@ -2,8 +2,8 @@ import sys
 
 import redis as redis_lib
 
-from LaylaRobot import log
-from LaylaRobot.config import get_str_key
+from LaylaRobot import LOGGER
+from LaylaRobot.conf import get_str_key
 
 # Init Redis
 redis = redis_lib.Redis(
