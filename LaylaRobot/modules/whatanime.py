@@ -2,7 +2,7 @@
 import os
 import time
 import html
-import aiohttp import ClientSession
+import aiohttp
 import asyncio
 import datetime
 import tempfile
