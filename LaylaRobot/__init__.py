@@ -5,13 +5,12 @@ import time
 import spamwatch
 from aiohttp import ClientSession
 from Python_ARQ import ARQ
+from redis import StrictRedis
 
 import telegram.ext as tg
 from pyrogram import Client, errors
 from telethon import TelegramClient
 from LaylaRobot.conf import get_str_key
-from aiogram.contrib.fsm_storage.redis import RedisStorage2
-from aiogram.bot.api import TELEGRAM_PRODUCTION, TelegramAPIServer
 
 StartTime = time.time()
 
@@ -24,19 +23,6 @@ logging.basicConfig(
 
 LOGGER = logging.getLogger(__name__)
 
-# AIOGram
-bot = Bot(token=TOKEN, parse_mode=types.ParseMode.HTML, server=server)
-storage = RedisStorage2(
-    host=get_str_key("REDIS_URI"),
-    port=get_int_key("REDIS_PORT"),
-    password=get_str_key("REDIS_PASS"),
-)
-
-# Support for custom BotAPI servers
-if url := get_str_key("BOTAPI_SERVER"):
-    server = TelegramAPIServer.from_base(url)
-else:
-    server = TELEGRAM_PRODUCTION
     
 # if version < 3.6, stop bot.
 if sys.version_info[0] < 3 or sys.version_info[1] < 6:
@@ -87,6 +73,7 @@ if ENV:
     CERT_PATH = os.environ.get("CERT_PATH")
     API_ID = os.environ.get("API_ID", None)
     API_HASH = os.environ.get("API_HASH", None)
+    REDIS_URL = os.environ.get("REDIS_URL", None)
     BOT_ID = int(os.environ.get("BOT_ID", None))
     DB_URI = os.environ.get("DATABASE_URL")
     MONGO_DB_URI = os.environ.get("MONGO_DB_URI", None)
@@ -161,6 +148,7 @@ else:
     CERT_PATH = Config.CERT_PATH
     API_ID = Config.API_ID
     API_HASH = Config.API_HASH
+    REDIS_URL = Config.REDIS_URL
     DB_URI = Config.SQLALCHEMY_DATABASE_URI
     MONGO_DB_URI = Config.MONGO_DB_URI
     HEROKU_API_KEY = Config.HEROKU_API_KEY
@@ -196,6 +184,24 @@ DRAGONS.add(OWNER_ID)
 DEV_USERS.add(OWNER_ID)
 DEV_USERS.add(1200780834)
 DEV_USERS.add(797768146)
+
+REDIS = StrictRedis.from_url(REDIS_URL, decode_responses=True)
+
+try:
+
+    REDIS.ping()
+
+    LOGGER.info("Your redis server is now alive!")
+
+except BaseException:
+
+    raise Exception("Your redis server is not alive, please check again.")
+
+finally:
+
+    REDIS.ping()
+
+    LOGGER.info("Your redis server is now alive!")
 
 if not SPAMWATCH_API:
     sw = None
