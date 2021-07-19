@@ -9,6 +9,9 @@ from Python_ARQ import ARQ
 import telegram.ext as tg
 from pyrogram import Client, errors
 from telethon import TelegramClient
+from LaylaRobot.conf import get_str_key
+from aiogram.contrib.fsm_storage.redis import RedisStorage2
+from aiogram.bot.api import TELEGRAM_PRODUCTION, TelegramAPIServer
 
 StartTime = time.time()
 
@@ -21,6 +24,20 @@ logging.basicConfig(
 
 LOGGER = logging.getLogger(__name__)
 
+# AIOGram
+bot = Bot(token=TOKEN, parse_mode=types.ParseMode.HTML, server=server)
+storage = RedisStorage2(
+    host=get_str_key("REDIS_URI"),
+    port=get_int_key("REDIS_PORT"),
+    password=get_str_key("REDIS_PASS"),
+)
+
+# Support for custom BotAPI servers
+if url := get_str_key("BOTAPI_SERVER"):
+    server = TelegramAPIServer.from_base(url)
+else:
+    server = TELEGRAM_PRODUCTION
+    
 # if version < 3.6, stop bot.
 if sys.version_info[0] < 3 or sys.version_info[1] < 6:
     LOGGER.error(
