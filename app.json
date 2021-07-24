@@ -168,7 +168,7 @@
       "NO_LOAD": {
          "description": "Dont load these modules cause they shit, space separation",
          "required": false,
-         "value": "chatbot karma antinsfw tiny shippering"
+         "value": "chatbot karma antinsfw tiny shippering covid"
       }, 
       "BL_CHATS": {
          "description": "List of chats you want blacklisted.",
