@@ -4,7 +4,10 @@ import time
 
 import LaylaRobot.modules.fun_strings as fun_strings
 from LaylaRobot import dispatcher
-from LaylaRobot.modules.disable import DisableAbleCommandHandler, DisableAbleMessageHandler
+from LaylaRobot.modules.disable import (
+    DisableAbleCommandHandler,
+    DisableAbleMessageHandler,
+)
 from LaylaRobot.modules.helper_funcs.chat_status import is_user_admin
 from LaylaRobot.modules.helper_funcs.alternate import typing_action
 from LaylaRobot.modules.helper_funcs.filters import CustomFilters
@@ -325,23 +328,23 @@ def weebify(update: Update, context: CallbackContext):
         message.reply_to_message.reply_text(string)
     else:
         message.reply_text(string)
-        
-        
-#@run_async
-#@typing_action
-#def goodnight(update, context):
+
+
+# @run_async
+# @typing_action
+# def goodnight(update, context):
 #    message = update.effective_message
 #    reply = random.choice(fun.GDNIGHT)
 #    message.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
 
 
-#@run_async
+# @run_async
 ##@typing_action
-#def goodmorning(update, context):
+# def goodmorning(update, context):
 #    message = update.effective_message
 #    reply = random.choice(fun.GDMORNING)
 #    message.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
-    
+
 
 __help__ = """
  ❍ /runs*:* reply a random string from an array of replies
@@ -423,5 +426,4 @@ __handlers__ = [
     SHOUT_HANDLER,
     WEEBIFY_HANDLER,
     EIGHTBALL_HANDLER,
-   
 ]

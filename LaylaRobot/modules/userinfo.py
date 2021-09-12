@@ -41,6 +41,7 @@ from LaylaRobot.modules.helper_funcs.extraction import extract_user
 from LaylaRobot import telethn as YoneTelethonClient, TIGERS, DRAGONS, DEMONS
 from LaylaRobot import pbot
 
+
 def no_by_per(totalhp, percentage):
     """
     rtype: num of `percentage` from total
@@ -521,7 +522,8 @@ def __user_info__(user_id):
     result = result.strip("\n")
     return result
 
-#whois
+
+# whois
 def ReplyCheck(message: Message):
     reply_id = None
 
@@ -566,6 +568,7 @@ def LastOnline(user: User):
 
 def FullName(user: User):
     return user.first_name + " " + user.last_name if user.last_name else user.first_name
+
 
 @pbot.on_message(filters.command("whois") & ~filters.edited & ~filters.bot)
 async def whois(client, message):

@@ -52,11 +52,9 @@ CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
 
 
 # Not async
-def warn(user: User,
-         chat: Chat,
-         reason: str,
-         message: Message,
-         warner: User = None) -> str:
+def warn(
+    user: User, chat: Chat, reason: str, message: Message, warner: User = None
+) -> str:
     if is_user_admin(chat, user.id):
         # message.reply_text("Damn admins, They are too far to be One Punched!")
         return
@@ -93,62 +91,70 @@ def warn(user: User,
             reply = (
                 f"<code>❕</code><b>Punch Event</b>\n"
                 f"<code> </code><b>•  User:</b> {mention_html(user.id, user.first_name)}\n"
-                f"<code> </code><b>•  Count:</b> {limit}")
+                f"<code> </code><b>•  Count:</b> {limit}"
+            )
 
         else:  # ban
             chat.kick_member(user.id)
             reply = (
                 f"<code>❕</code><b>Ban Event</b>\n"
                 f"<code> </code><b>•  User:</b> {mention_html(user.id, user.first_name)}\n"
-                f"<code> </code><b>•  Count:</b> {limit}")
+                f"<code> </code><b>•  Count:</b> {limit}"
+            )
 
         for warn_reason in reasons:
             reply += f"\n - {html.escape(warn_reason)}"
 
         # message.bot.send_sticker(chat.id, BAN_STICKER)  # Saitama's sticker
         keyboard = None
-        log_reason = (f"<b>{html.escape(chat.title)}:</b>\n"
-                      f"#WARN_BAN\n"
-                      f"<b>Admin:</b> {warner_tag}\n"
-                      f"<b>User:</b> {mention_html(user.id, user.first_name)}\n"
-                      f"<b>Reason:</b> {reason}\n"
-                      f"<b>Counts:</b> <code>{num_warns}/{limit}</code>")
+        log_reason = (
+            f"<b>{html.escape(chat.title)}:</b>\n"
+            f"#WARN_BAN\n"
+            f"<b>Admin:</b> {warner_tag}\n"
+            f"<b>User:</b> {mention_html(user.id, user.first_name)}\n"
+            f"<b>Reason:</b> {reason}\n"
+            f"<b>Counts:</b> <code>{num_warns}/{limit}</code>"
+        )
 
     else:
-        keyboard = InlineKeyboardMarkup([[
-            InlineKeyboardButton(
-                "🔘 Remove warn", callback_data="rm_warn({})".format(user.id))
-        ]])
+        keyboard = InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        "🔘 Remove warn", callback_data="rm_warn({})".format(user.id)
+                    )
+                ]
+            ]
+        )
 
         reply = (
             f"<code>❕</code><b>Warn Event</b>\n"
             f"<code> </code><b>•  User:</b> {mention_html(user.id, user.first_name)}\n"
-            f"<code> </code><b>•  Count:</b> {num_warns}/{limit}")
+            f"<code> </code><b>•  Count:</b> {num_warns}/{limit}"
+        )
         if reason:
             reply += f"\n<code> </code><b>•  Reason:</b> {html.escape(reason)}"
 
-        log_reason = (f"<b>{html.escape(chat.title)}:</b>\n"
-                      f"#WARN\n"
-                      f"<b>Admin:</b> {warner_tag}\n"
-                      f"<b>User:</b> {mention_html(user.id, user.first_name)}\n"
-                      f"<b>Reason:</b> {reason}\n"
-                      f"<b>Counts:</b> <code>{num_warns}/{limit}</code>")
+        log_reason = (
+            f"<b>{html.escape(chat.title)}:</b>\n"
+            f"#WARN\n"
+            f"<b>Admin:</b> {warner_tag}\n"
+            f"<b>User:</b> {mention_html(user.id, user.first_name)}\n"
+            f"<b>Reason:</b> {reason}\n"
+            f"<b>Counts:</b> <code>{num_warns}/{limit}</code>"
+        )
 
     try:
-        message.reply_text(
-            reply, reply_markup=keyboard, parse_mode=ParseMode.HTML)
+        message.reply_text(reply, reply_markup=keyboard, parse_mode=ParseMode.HTML)
     except BadRequest as excp:
         if excp.message == "Reply message not found":
             # Do not reply
             message.reply_text(
-                reply,
-                reply_markup=keyboard,
-                parse_mode=ParseMode.HTML,
-                quote=False)
+                reply, reply_markup=keyboard, parse_mode=ParseMode.HTML, quote=False
+            )
         else:
             raise
     return log_reason
-
 
 
 @run_async

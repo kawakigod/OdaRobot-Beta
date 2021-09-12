@@ -31,7 +31,7 @@ from LaylaRobot.conf import get_int_key, get_str_key
 # from LaylaRobot.db.mongo_helpers.nsfw_guard import add_chat, get_all_nsfw_chats, is_chat_in_db, rm_chat
 from LaylaRobot.pyrogramee.telethonbasics import is_admin
 from LaylaRobot.events import register
-from LaylaRobot import MONGO_DB_URI 
+from LaylaRobot import MONGO_DB_URI
 from pymongo import MongoClient
 from LaylaRobot.modules.sql_extended.nsfw_watch_sql import (
     add_nsfwatch,
@@ -49,6 +49,7 @@ MONGO_DB_URI = get_str_key("MONGO_DB_URI")
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
 db = client["LaylaRobot"]
+
 
 async def is_nsfw(event):
     lmao = event
@@ -121,9 +122,7 @@ async def nsfw_watch(event):
                 f"**Removed Chat {event.chat.title} With Id {event.chat_id} From Nsfw Watch**"
             )
         else:
-            await event.reply(
-                "I undestand `/antinsfw on` and `/antinsfw off` only"
-            )
+            await event.reply("I undestand `/antinsfw on` and `/antinsfw off` only")
     else:
         await event.reply("`You Should Be Admin To Do This!`")
         return
@@ -426,6 +425,8 @@ async def del_profanity(event):
                     dev = await event.respond(final)
                     await asyncio.sleep(10)
                     await dev.delete()
+
+
 #
 
 __help__ = """

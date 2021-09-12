@@ -90,7 +90,8 @@ I've some features for you :)
 buttons = [
     [
         InlineKeyboardButton(
-            text="➕️ ᴀᴅᴅ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url="t.me/OdaRobot?startgroup=true"),
+            text="➕️ ᴀᴅᴅ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url="t.me/OdaRobot?startgroup=true"
+        ),
     ],
     [
         InlineKeyboardButton(text="✫ About ✫", callback_data="layla_"),
@@ -99,10 +100,10 @@ buttons = [
         ),
     ],
     [
-        InlineKeyboardButton(text="✯ Anime Group ✯", url=f"https://t.me/Grup_Anime_Chat"),
         InlineKeyboardButton(
-            text="✯ Channnel ✯", url=f"https://t.me/userlazyxbot"
+            text="✯ Anime Group ✯", url=f"https://t.me/Grup_Anime_Chat"
         ),
+        InlineKeyboardButton(text="✯ Channnel ✯", url=f"https://t.me/userlazyxbot"),
     ],
     [
         InlineKeyboardButton(text="[► Help ◄]", callback_data="help_back"),
@@ -208,7 +209,13 @@ def start(update: Update, context: CallbackContext):
                     update.effective_chat.id,
                     HELPABLE[mod].__help__,
                     InlineKeyboardMarkup(
-                        [[InlineKeyboardButton(text="⬅️ BACK", callback_data="help_back")]]
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    text="⬅️ BACK", callback_data="help_back"
+                                )
+                            ]
+                        ]
                     ),
                 )
 
@@ -227,11 +234,12 @@ def start(update: Update, context: CallbackContext):
         else:
             first_name = update.effective_user.first_name
             update.effective_message.reply_text(
-                    PM_START_TEXT.format(
+                PM_START_TEXT.format(
                     escape_markdown(first_name),
                     escape_markdown(uptime),
                     sql.num_users(),
-                    sql.num_chats()),
+                    sql.num_chats(),
+                ),
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
@@ -240,9 +248,10 @@ def start(update: Update, context: CallbackContext):
         update.effective_message.reply_photo(
             ODA_IMG,
             caption="I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
-                uptime),
+                uptime
+            ),
             parse_mode=ParseMode.HTML,
-            )
+        )
 
 
 def error_handler(update, context):
@@ -389,20 +398,16 @@ def layla_about_callback(update, context):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [
-                 [
-                    InlineKeyboardButton(text="Back", callback_data="layla_back")
-                 ]
-                ]
+                [[InlineKeyboardButton(text="Back", callback_data="layla_back")]]
             ),
         )
     elif query.data == "layla_back":
         query.message.edit_text(
-                PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
+            PM_START_TEXT,
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode=ParseMode.MARKDOWN,
+            timeout=60,
+            disable_web_page_preview=False,
         )
 
 
@@ -416,21 +421,18 @@ def Source_about_callback(update, context):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [
-                 [
-                    InlineKeyboardButton(text="Go Back", callback_data="source_back")
-                 ]
-                ]
+                [[InlineKeyboardButton(text="Go Back", callback_data="source_back")]]
             ),
         )
     elif query.data == "source_back":
         query.message.edit_text(
-                PM_START_TEXT,
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
+            PM_START_TEXT,
+            reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode=ParseMode.MARKDOWN,
+            timeout=60,
+            disable_web_page_preview=False,
         )
+
 
 @run_async
 def get_help(update: Update, context: CallbackContext):
@@ -675,9 +677,7 @@ def donate(update: Update, context: CallbackContext):
                 disable_web_page_preview=True,
             )
 
-            update.effective_message.reply_text(
-                "I've PM'ed you about my creator!"
-            )
+            update.effective_message.reply_text("I've PM'ed you about my creator!")
         except Unauthorized:
             update.effective_message.reply_text(
                 "Contact me in PM first to get information."
@@ -724,8 +724,12 @@ def main():
     settings_handler = CommandHandler("settings", get_settings)
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_")
 
-    about_callback_handler = CallbackQueryHandler(layla_about_callback, pattern=r"layla_")
-    source_callback_handler = CallbackQueryHandler(Source_about_callback, pattern=r"source_")
+    about_callback_handler = CallbackQueryHandler(
+        layla_about_callback, pattern=r"layla_"
+    )
+    source_callback_handler = CallbackQueryHandler(
+        Source_about_callback, pattern=r"source_"
+    )
 
     donate_handler = CommandHandler("donate", donate)
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)

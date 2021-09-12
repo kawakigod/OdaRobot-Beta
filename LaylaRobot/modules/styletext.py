@@ -1,4 +1,4 @@
-from LaylaRobot  import dispatcher
+from LaylaRobot import dispatcher
 from LaylaRobot.modules.disable import DisableAbleCommandHandler
 from LaylaRobot.modules.helper_funcs.alternate import typing_action
 from telegram import ParseMode
@@ -480,6 +480,8 @@ def lined(update, context):
         message.reply_to_message.reply_text(string)
     else:
         message.reply_text(string)
+
+
 __help__ = """
 
  - /weebify <text>: weebify your text!
