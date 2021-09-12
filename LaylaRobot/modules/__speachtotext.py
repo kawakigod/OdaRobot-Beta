@@ -18,6 +18,7 @@ IBM_WATSON_CRED_PASSWORD = "UQ1MtTzZhEsMGK094klnfa-7y_4MCpJY1yhd52MXOo3Y"
 IBM_WATSON_CRED_URL = "https://api.us-south.speech-to-text.watson.cloud.ibm.com/instances/bd6b59ba-3134-4dd4-aff2-49a79641ea15"
 TEMP_DOWNLOAD_DIRECTORY = "./"
 
+
 async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
         return isinstance(
@@ -35,9 +36,11 @@ async def _(event):
     if event.fwd_from:
         return
     if event.is_group:
-     if not (await is_register_admin(event.input_chat, event.message.sender_id)):
-       await event.reply("🚨 Need Admin Pewer.. You can't use this command.. But you can use in my pm")
-       return
+        if not (await is_register_admin(event.input_chat, event.message.sender_id)):
+            await event.reply(
+                "🚨 Need Admin Pewer.. You can't use this command.. But you can use in my pm"
+            )
+            return
 
     start = datetime.now()
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):

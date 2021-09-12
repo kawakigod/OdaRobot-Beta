@@ -36,16 +36,13 @@ from PIL import Image
 from pyrogram import Client
 from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.types import Chat, Message, User
-from pyrogram.errors.exceptions.forbidden_403 import \
-    ChatWriteForbidden
+from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
 
 from LaylaRobot import OWNER_ID, pbot
 from LaylaRobot.utils.karmaperm import member_permissions
 
 
-async def authorised(
-    func, subFunc2, client, message, *args, **kwargs
-):
+async def authorised(func, subFunc2, client, message, *args, **kwargs):
     chatID = message.chat.id
     try:
         await func(client, message, *args, **kwargs)
@@ -87,24 +84,14 @@ def adminsOnly(permission):
                         *args,
                         **kwargs,
                     )
-                return await unauthorised(
-                    message, permission, subFunc2
-                )
+                return await unauthorised(message, permission, subFunc2)
             # For admins and sudo users
             userID = message.from_user.id
             permissions = await member_permissions(chatID, userID)
-            if (
-                userID not in SUDOERS
-                and permission not in permissions
-            ):
-                return await unauthorised(
-                    message, permission, subFunc2
-                )
-            return await authorised(
-                func, subFunc2, client, message, *args, **kwargs
-            )
+            if userID not in SUDOERS and permission not in permissions:
+                return await unauthorised(message, permission, subFunc2)
+            return await authorised(func, subFunc2, client, message, *args, **kwargs)
 
         return subFunc2
 
     return subFunc
-

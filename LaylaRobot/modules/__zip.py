@@ -208,6 +208,7 @@ def get_lst_of_files(input_directory, output_lst):
         output_lst.append(current_file_name)
     return output_lst
 
+
 __mod_name__ = "Zipper"
 __help__ = """
  - /zip: reply to a telegram file to compress it in .zip format

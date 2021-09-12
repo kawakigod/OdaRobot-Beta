@@ -729,6 +729,7 @@ async def extract_time(message, time_val):
         )
         return
 
+
 @run_async
 @connection_status
 @bot_admin
@@ -889,7 +890,8 @@ def demote(update: Update, context: CallbackContext) -> str:
             " user, so I can't act upon them!"
         )
         return
-    
+
+
 @run_async
 @bot_admin
 @can_pin
@@ -1100,8 +1102,8 @@ def adminlist(update, context):
         msg.edit_text(text, parse_mode=ParseMode.HTML)
     except BadRequest:  # if original message is deleted
         return
-    
-    
+
+
 ADMINLIST_HANDLER = DisableAbleCommandHandler("admins", adminlist)
 
 PIN_HANDLER = CommandHandler("pin", pin, filters=Filters.group)

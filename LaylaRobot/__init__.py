@@ -22,7 +22,7 @@ logging.basicConfig(
 
 LOGGER = logging.getLogger(__name__)
 
-    
+
 # if version < 3.6, stop bot.
 if sys.version_info[0] < 3 or sys.version_info[1] < 6:
     LOGGER.error(
@@ -173,7 +173,7 @@ else:
     SPAMWATCH_API = Config.SPAMWATCH_API
     INFOPIC = Config.INFOPIC
     REDIS_URL = Config.REDIS_URL
-    
+
     try:
         BL_CHATS = set(int(x) for x in Config.BL_CHATS or [])
     except ValueError:
@@ -226,9 +226,7 @@ print("[INFO]: INITIALIZING ARQ CLIENT")
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 # Bot client
 print("[INFO]: INITIALIZING BOT CLIENT")
-app = Client(
-    "LaylaRobot", bot_token=TOKEN, api_id=API_ID, api_hash=API_HASH
-)
+app = Client("LaylaRobot", bot_token=TOKEN, api_id=API_ID, api_hash=API_HASH)
 
 
 DRAGONS = list(DRAGONS) + list(DEV_USERS)

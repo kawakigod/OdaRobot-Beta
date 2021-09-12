@@ -1,4 +1,3 @@
-
 import html
 
 from LaylaRobot import ALLOW_EXCL, CustomCommandHandler, dispatcher

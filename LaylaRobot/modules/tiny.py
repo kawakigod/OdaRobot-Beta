@@ -33,7 +33,8 @@ from LaylaRobot.events import register
 async def _(event):
     if event.fwd_from:
         return
-    
+
+
 async def ultiny(event):
     reply = await event.get_reply_message()
     if not (reply and (reply.media)):

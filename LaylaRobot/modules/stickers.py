@@ -61,6 +61,7 @@ def cb_sticker(update: Update, context: CallbackContext):
         reply += f"\n• [{title.get_text()}]({link})"
     msg.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
 
+
 def getsticker(update: Update, context: CallbackContext):
     bot = context.bot
     msg = update.effective_message

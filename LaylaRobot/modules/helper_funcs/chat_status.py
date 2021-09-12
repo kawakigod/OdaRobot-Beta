@@ -286,7 +286,6 @@ def bot_can_delete(func):
 
 
 def can_pin(func):
-
     @wraps(func)
     def pin_rights(update: Update, context: CallbackContext, *args, **kwargs):
         bot = context.bot
@@ -295,17 +294,19 @@ def can_pin(func):
         message_chat_title = update.effective_message.chat.title
 
         if update_chat_title == message_chat_title:
-            cant_pin = "I can't pin messages here!\nMake sure I'm admin and can pin messages."
+            cant_pin = (
+                "I can't pin messages here!\nMake sure I'm admin and can pin messages."
+            )
         else:
             cant_pin = f"I can't pin messages in <b>{update_chat_title}</b>!\nMake sure I'm admin and can pin messages there."
 
         if chat.get_member(bot.id).can_pin_messages:
             return func(update, context, *args, **kwargs)
         else:
-            update.effective_message.reply_text(
-                cant_pin, parse_mode=ParseMode.HTML)
+            update.effective_message.reply_text(cant_pin, parse_mode=ParseMode.HTML)
 
     return pin_rights
+
 
 def can_promote(func):
     @wraps(func)
@@ -365,9 +366,7 @@ def user_can_ban(func):
             and user not in DRAGONS
             and user not in [777000, 1087968824]
         ):
-            update.effective_message.reply_text(
-                "😹 Sorry You can't do that"
-            )
+            update.effective_message.reply_text("😹 Sorry You can't do that")
             return ""
         return func(update, context, *args, **kwargs)
 

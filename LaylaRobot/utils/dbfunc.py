@@ -8,6 +8,7 @@ nsfwdb = db.nsfw
 
 # Couple Chooser
 
+
 async def _get_lovers(chat_id: int):
     lovers = coupledb.find_one({"chat_id": chat_id})
     if lovers:
@@ -29,16 +30,11 @@ async def save_couple(chat_id: int, date: str, couple: dict):
     lovers = await _get_lovers(chat_id)
     lovers[date] = couple
     await coupledb.update_one(
-        {"chat_id": chat_id},
-        {
-            "$set": {
-                "couple": lovers
-            }
-        },
-        upsert=True
+        {"chat_id": chat_id}, {"$set": {"couple": lovers}}, upsert=True
     )
-    
- # Karma Database
+
+
+# Karma Database
 
 karmadb = db.karma2
 
@@ -62,13 +58,17 @@ async def karma_off(chat_id: int):
     if not is_karma:
         return
     return await karmadb.delete_one({"chat_id": chat_id})
+
+
 ##
+
 
 async def is_nsfw_on(chat_id: int) -> bool:
     chat = await nsfwdb.find_one({"chat_id": chat_id})
     if not chat:
         return True
     return False
+
 
 async def nsfw_on(chat_id: int):
     is_nsfw = await is_nsfw_on(chat_id)

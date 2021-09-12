@@ -8,12 +8,12 @@ from LaylaRobot.mongo import db
 from LaylaRobot.utils.dbfunc import is_karma_on, karma_off, karma_on
 from LaylaRobot.pyrogramee.pluginshelper import member_permissions
 from LaylaRobot import pbot as app
-from LaylaRobot.utils.filter_groups import (karma_positive_group, 
-                                        karma_negative_group)
+from LaylaRobot.utils.filter_groups import karma_positive_group, karma_negative_group
 
 karma_negative_group = 4
 karma_positive_group = 3
 karmadb = db.karma
+
 
 async def int_to_alpha(user_id: int) -> str:
     alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"]

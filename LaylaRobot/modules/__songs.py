@@ -1,6 +1,6 @@
 import os
 
-#Saavn 
+# Saavn
 
 import requests
 import wget
@@ -18,9 +18,7 @@ async def song(client, message):
     if args.startswith(" "):
         await message.reply("<b>Enter song name❗</b>")
         return ""
-    m = await message.reply_text(
-        "Downloading your song,\nPlz wait ⏳️"
-    )
+    m = await message.reply_text("Downloading your song,\nPlz wait ⏳️")
     try:
         r = requests.get(f"https://jostapi.herokuapp.com/saavn?query={args}")
     except Exception as e:
@@ -37,7 +35,7 @@ async def song(client, message):
     await m.delete()
 
 
-#deezer#
+# deezer#
 # Credits for @TheHamkerCat
 
 import os
@@ -48,6 +46,7 @@ from LaylaRobot import pbot as Layla
 
 ARQ = "https://thearq.tech/"
 
+
 async def fetch(url):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp:
@@ -56,6 +55,7 @@ async def fetch(url):
             except:
                 data = await resp.text()
     return data
+
 
 async def download_song(url):
     song_name = f"asuna.mp3"
@@ -91,7 +91,8 @@ async def deezer(_, message):
     os.remove(song)
     await m.delete()
 
-#Deezer
+
+# Deezer
 # Credits for @TheHamkerCat
 
 import os
@@ -102,6 +103,7 @@ from LaylaRobot import pbot as ASUNA
 
 ARQ = "https://thearq.tech/"
 
+
 async def fetch(url):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp:
@@ -110,6 +112,7 @@ async def fetch(url):
             except:
                 data = await resp.text()
     return data
+
 
 async def download_song(url):
     song_name = f"asuna.mp3"
@@ -144,8 +147,8 @@ async def deezer(_, message):
     await message.reply_audio(audio=song, title=title, performer=artist)
     os.remove(song)
     await m.delete()
-    
-    
+
+
 __mod_name__ = "Music"
 
 __help__ = """
@@ -155,4 +158,3 @@ __help__ = """
 • `/lyrics`** <songname artist(optional)>: sends the complete lyrics of the song provided as input
 • `/glyrics`** <i> song name </i> : This plugin searches for song lyrics with song name and artist.
 """
-

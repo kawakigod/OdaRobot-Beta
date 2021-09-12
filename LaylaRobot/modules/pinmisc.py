@@ -52,6 +52,7 @@ async def build_keyboard(buttons):
 
     return keyb
 
+
 class MongoDB:
     """Class for interacting with Bot database."""
 
@@ -388,6 +389,7 @@ async def antichanpin_cleanlinked(c, m: Message):
     except Exception:
         return
     return
+
 
 __mod_name__ = "Pinning"
 
