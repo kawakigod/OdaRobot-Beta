@@ -6,8 +6,8 @@ import requests
 import wget
 from pyrogram import filters
 
-from LaylaRobot import pbot as Jebot
-from LaylaRobot.pyrogramee.dark import get_arg
+from RaidenShogunBot import pbot as Jebot
+from RaidenShogunBot.pyrogramee.dark import get_arg
 
 
 @Jebot.on_message(filters.command("saavn"))
@@ -42,7 +42,7 @@ import os
 import aiofiles
 import aiohttp
 from pyrogram import filters
-from LaylaRobot import pbot as Layla
+from RaidenShogunBot import pbot as Layla
 
 ARQ = "https://thearq.tech/"
 
@@ -58,7 +58,7 @@ async def fetch(url):
 
 
 async def download_song(url):
-    song_name = f"asuna.mp3"
+    song_name = f"Raiden.mp3"
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp:
             if resp.status == 200:
@@ -99,7 +99,7 @@ import os
 import aiofiles
 import aiohttp
 from pyrogram import filters
-from LaylaRobot import pbot as ASUNA
+from RaidenShogunBot import pbot as RAIDEN
 
 ARQ = "https://thearq.tech/"
 
@@ -115,7 +115,7 @@ async def fetch(url):
 
 
 async def download_song(url):
-    song_name = f"asuna.mp3"
+    song_name = f"Raiden.mp3"
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as resp:
             if resp.status == 200:
